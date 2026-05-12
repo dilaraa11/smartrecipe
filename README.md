@@ -22,22 +22,26 @@
 <!-- Diese Vorlage ist für eine README.md im Repository gedacht. Abschnitte mit [Optional] können weggelassen werden, wenn in den Übungen nichts anderes verlangt wird. -->
 
 ## 1. Ausgangslage
-Kurz beschreiben, welches Problem adressiert wird und welches Ergebnis angestrebt ist. Wem nützt die Lösung, wer ist beteiligt oder betroffen?
 Viele Personen stehen täglich vor der Frage, was sie mit den vorhandenen Zutaten zuhause kochen können. Oft fehlen Ideen für passende Gerichte, obwohl bereits genügend Lebensmittel vorhanden wären. Zusätzlich verbringen Nutzer viel Zeit mit der Suche nach einfachen Rezepten oder vergessen interessante Gerichte, die sie bereits gefunden haben.
-- **Problem:** _[Das Problem ist identifiziert, verständlich beschrieben und optional mit Beispielen illustriert]_
-   Nutzer besitzen Zutaten zuhause, wissen jedoch nicht, welche Gerichte sie daraus zubereiten können. Zudem fehlt häufig eine einfache Möglichkeit, Rezepte zentral zu        speichern und wiederzufinden.
-- **Ziele:** _[stichwortartig oder einige Sätze]_
-  Entwicklung einer modernen Webapplikation zur Rezeptsuche basierend auf vorhandenen Zutaten. Nutzer sollen passende Rezepte finden, eigene Rezepte erstellen sowie          Favoriten speichern können.
-- **Primäre Zielgruppe:** _[kurz beschreiben]_
+- **Problem:** 
+   Nutzer besitzen Zutaten zuhause, wissen jedoch nicht, welche Gerichte sie daraus zubereiten können. Zudem fehlt häufig eine einfache Möglichkeit, Rezepte zentral zu speichern und wiederzufinden.
+- **Ziele:** 
+  Entwicklung einer modernen Webapplikation zur Rezeptsuche basierend auf vorhandenen Zutaten. Nutzer sollen passende Rezepte finden, eigene Rezepte erstellen sowie Favoriten speichern können.
+- **Primäre Zielgruppe:** 
   Personen, die einfach und schnell Rezeptideen mit vorhandenen Zutaten suchen möchten.
-- **Weitere Stakeholder [Optional]:** _[z. B. Verwaltung, Geschäftsleitung]_
+- **Weitere Stakeholder [Optional]:** 
   Hobbyköche, Studenten, Familien oder Personen mit wenig Zeit zum Kochen.
 
 
 ## 2. Lösungsidee
-Beschreibt die Lösungsidee.
-- **Kernfunktionalität:** _[Workflows kurz nennen und optional illustrieren]_  
-- **Annahmen [Optional]:** _[welche Hypothesen werden geprüft?]_
+Die Anwendung „SmartRecipe“ ist eine Fullstack-Webapplikation, welche Nutzern ermöglicht, Zutaten einzugeben und passende Rezepte anzuzeigen. Die Daten werden dynamisch aus einer MongoDB-Datenbank geladen. Zusätzlich können eigene Rezepte erstellt und Favoriten gespeichert werden.
+- **Kernfunktionalität:** 
+  - Rezeptsuche anhand von Zutaten  
+  - Anzeige von Rezeptdetails  
+  - Eigene Rezepte erstellen und speichern  
+  - Favoritenfunktion  
+- **Annahmen [Optional]:** 
+ Nutzer bevorzugen eine einfache und übersichtliche Benutzeroberfläche sowie schnelle Rezeptvorschläge ohne komplizierte Filter.
 - **Abgrenzung [Optional]:** _[Was gehört explizit nicht zum Umfang?]_
 
 ## 3. Vorgehen & Artefakte
