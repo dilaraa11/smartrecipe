@@ -1,4 +1,4 @@
-# Projektdokumentation - [Projekttitel]
+# Projektdokumentation - SmartRecipe
 
 ## Inhaltsverzeichnis
 
@@ -23,10 +23,15 @@
 
 ## 1. Ausgangslage
 Kurz beschreiben, welches Problem adressiert wird und welches Ergebnis angestrebt ist. Wem nützt die Lösung, wer ist beteiligt oder betroffen?
-- **Problem:** _[Das Problem ist identifiziert, verständlich beschrieben und optional mit Beispielen illustriert]_  
-- **Ziele:** _[stichwortartig oder einige Sätze]_  
-- **Primäre Zielgruppe:** _[kurz beschreiben]_  
-- **Weitere Stakeholder [Optional]:** _[z. B. Verwaltung, Geschäftsleitung]_  
+Viele Personen stehen täglich vor der Frage, was sie mit den vorhandenen Zutaten zuhause kochen können. Oft fehlen Ideen für passende Gerichte, obwohl bereits genügend Lebensmittel vorhanden wären. Zusätzlich verbringen Nutzer viel Zeit mit der Suche nach einfachen Rezepten oder vergessen interessante Gerichte, die sie bereits gefunden haben.
+- **Problem:** _[Das Problem ist identifiziert, verständlich beschrieben und optional mit Beispielen illustriert]_
+   Nutzer besitzen Zutaten zuhause, wissen jedoch nicht, welche Gerichte sie daraus zubereiten können. Zudem fehlt häufig eine einfache Möglichkeit, Rezepte zentral zu        speichern und wiederzufinden.
+- **Ziele:** _[stichwortartig oder einige Sätze]_
+  Entwicklung einer modernen Webapplikation zur Rezeptsuche basierend auf vorhandenen Zutaten. Nutzer sollen passende Rezepte finden, eigene Rezepte erstellen sowie          Favoriten speichern können.
+- **Primäre Zielgruppe:** _[kurz beschreiben]_
+  Personen, die einfach und schnell Rezeptideen mit vorhandenen Zutaten suchen möchten.
+- **Weitere Stakeholder [Optional]:** _[z. B. Verwaltung, Geschäftsleitung]_
+  Hobbyköche, Studenten, Familien oder Personen mit wenig Zeit zum Kochen.
 
 
 ## 2. Lösungsidee
