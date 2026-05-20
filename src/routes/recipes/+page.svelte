@@ -9,6 +9,20 @@
   const ingredientsFromUrl = $derived(
     page.url.searchParams.get("ingredients")?.split(",").filter(Boolean) ?? [],
   );
+  const maxTimeFromUrl = $derived(page.url.searchParams.get("maxTime") ?? "");
+  const difficultyFromUrl = $derived(
+    page.url.searchParams.get("difficulty") ?? "",
+  );
+  const tagsFromUrl = $derived(
+    page.url.searchParams.get("tags")?.split(",").filter(Boolean) ?? [],
+  );
+
+  const activeFiltersCount = $derived(
+    ingredientsFromUrl.length +
+      (maxTimeFromUrl ? 1 : 0) +
+      (difficultyFromUrl ? 1 : 0) +
+      tagsFromUrl.length,
+  );
 
   async function loadRecipes() {
     try {
@@ -34,18 +48,36 @@
     loadRecipes();
   });
 
-  const filteredRecipes = $derived(
-    ingredientsFromUrl.length === 0
-      ? recipes
-      : recipes.filter((recipe) =>
-          ingredientsFromUrl.every((searchIngredient) =>
-            recipe.ingredients.some(
-              (recipeIngredient) =>
-                recipeIngredient.toLowerCase() ===
-                searchIngredient.toLowerCase(),
-            ),
-          ),
+  function recipeMatchesFilters(recipe: Recipe) {
+    const matchesIngredients =
+      ingredientsFromUrl.length === 0 ||
+      ingredientsFromUrl.every((searchIngredient) =>
+        recipe.ingredients.some(
+          (recipeIngredient) =>
+            recipeIngredient.toLowerCase() === searchIngredient.toLowerCase(),
         ),
+      );
+
+    const matchesTime =
+      !maxTimeFromUrl || recipe.time <= Number(maxTimeFromUrl);
+    const matchesDifficulty =
+      !difficultyFromUrl || recipe.difficulty === difficultyFromUrl;
+    const matchesTags =
+      tagsFromUrl.length === 0 ||
+      tagsFromUrl.every((selectedTag) =>
+        recipe.tags.some(
+          (recipeTag) =>
+            recipeTag.toLowerCase() === selectedTag.toLowerCase(),
+        ),
+      );
+
+    return matchesIngredients && matchesTime && matchesDifficulty && matchesTags;
+  }
+
+  const filteredRecipes = $derived(
+    activeFiltersCount === 0
+      ? recipes
+      : recipes.filter((recipe) => recipeMatchesFilters(recipe)),
   );
 </script>
 
@@ -57,13 +89,22 @@
     <p>Entdecke passende Rezeptideen und finde schnell etwas Leckeres.</p>
   </section>
 
-  {#if ingredientsFromUrl.length > 0}
+  {#if activeFiltersCount > 0}
     <section class="active-search">
-      <strong>Gesucht mit:</strong>
+      <strong>{filteredRecipes.length} Rezepte gefunden mit:</strong>
 
       <div>
         {#each ingredientsFromUrl as ingredient}
           <span>{ingredient}</span>
+        {/each}
+        {#if maxTimeFromUrl}
+          <span>bis {maxTimeFromUrl} Min</span>
+        {/if}
+        {#if difficultyFromUrl}
+          <span>{difficultyFromUrl}</span>
+        {/if}
+        {#each tagsFromUrl as tag}
+          <span>{tag}</span>
         {/each}
       </div>
     </section>

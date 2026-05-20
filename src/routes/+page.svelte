@@ -19,18 +19,26 @@
     "Meal Prep",
   ];
 
+  const activeFiltersCount = $derived(
+    ingredients.length +
+      (maxTime ? 1 : 0) +
+      (difficultyFilter ? 1 : 0) +
+      selectedTags.length,
+  );
+
   const matchingRecipesCount = $derived(
-    ingredients.length === 0
+    activeFiltersCount === 0
       ? 0
-      : recipes.filter((recipe) =>
-          ingredients.every((searchIngredient) =>
-            recipe.ingredients.some(
-              (recipeIngredient) =>
-                recipeIngredient.toLowerCase() ===
-                searchIngredient.toLowerCase(),
-            ),
-          ),
-        ).length,
+      : recipes.filter((recipe) => recipeMatchesFilters(recipe)).length,
+  );
+  const customSelectedTags = $derived(
+    selectedTags.filter(
+      (selectedTag) =>
+        !tagOptions.some(
+          (tagOption) =>
+            tagOption.toLowerCase() === selectedTag.toLowerCase(),
+        ),
+    ),
   );
 
   async function loadRecipes() {
@@ -55,9 +63,63 @@
     ingredients = ingredients.filter((i) => i !== item);
   }
 
+  function addTag() {
+    const cleaned = tagSearch.trim();
+
+    if (
+      cleaned &&
+      !selectedTags.some((tag) => tag.toLowerCase() === cleaned.toLowerCase())
+    ) {
+      selectedTags = [...selectedTags, cleaned];
+      tagSearch = "";
+    }
+  }
+
+  function recipeMatchesFilters(recipe: Recipe) {
+    const matchesIngredients =
+      ingredients.length === 0 ||
+      ingredients.every((searchIngredient) =>
+        recipe.ingredients.some(
+          (recipeIngredient) =>
+            recipeIngredient.toLowerCase() === searchIngredient.toLowerCase(),
+        ),
+      );
+
+    const matchesTime = !maxTime || recipe.time <= Number(maxTime);
+    const matchesDifficulty =
+      !difficultyFilter || recipe.difficulty === difficultyFilter;
+    const matchesTags =
+      selectedTags.length === 0 ||
+      selectedTags.every((selectedTag) =>
+        recipe.tags.some(
+          (recipeTag) =>
+            recipeTag.toLowerCase() === selectedTag.toLowerCase(),
+        ),
+      );
+
+    return matchesIngredients && matchesTime && matchesDifficulty && matchesTags;
+  }
+
   function searchRecipes() {
-    const query = ingredients.join(",");
-    goto(`/recipes?ingredients=${query}`);
+    const params = new URLSearchParams();
+
+    if (ingredients.length > 0) {
+      params.set("ingredients", ingredients.join(","));
+    }
+
+    if (maxTime) {
+      params.set("maxTime", maxTime);
+    }
+
+    if (difficultyFilter) {
+      params.set("difficulty", difficultyFilter);
+    }
+
+    if (selectedTags.length > 0) {
+      params.set("tags", selectedTags.join(","));
+    }
+
+    goto(`/recipes?${params.toString()}`);
   }
 </script>
 
@@ -140,8 +202,11 @@
                 id="tag-search"
                 bind:value={tagSearch}
                 placeholder="z.B. Asiatisch, Low Carb, Familienküche"
+                onkeydown={(e) => e.key === "Enter" && addTag()}
               />
-              <button class="tag-add-button" type="button">+</button>
+              <button class="tag-add-button" type="button" onclick={addTag}>
+                +
+              </button>
             </div>
 
             <div class="filter-tags" aria-label="Tag-Vorschläge">
@@ -151,11 +216,17 @@
                   <span>{tag}</span>
                 </label>
               {/each}
+              {#each customSelectedTags as tag}
+                <label class="filter-chip">
+                  <input type="checkbox" bind:group={selectedTags} value={tag} />
+                  <span>{tag}</span>
+                </label>
+              {/each}
             </div>
           </div>
         </div>
 
-        {#if ingredients.length > 0}
+        {#if activeFiltersCount > 0}
           <button class="primary-button" onclick={searchRecipes}>
             Passende Rezepte finden
           </button>
