@@ -405,6 +405,33 @@ textarea:focus {
   font-weight: 700;
 }
 
+.auth-card {
+  display: grid;
+  gap: 1rem;
+}
+
+.auth-switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  padding: 0.35rem;
+  border-radius: 1rem;
+  background: #fff7ed;
+}
+
+.auth-switch button {
+  min-height: 2.8rem;
+  border-radius: 0.8rem;
+  background: transparent;
+  color: #7c5d3f;
+}
+
+.auth-switch button.active,
+.auth-switch button:hover {
+  background: #fb923c;
+  color: white;
+}
+
 .icon {
   font-size: 3rem;
 }

@@ -54,7 +54,7 @@
   <section class="header">
     <p class="eyebrow">Rezeptideen</p>
     <h1>Passende Rezepte entdecken</h1>
-    <p>Diese Rezepte werden direkt aus deiner MongoDB-Datenbank geladen.</p>
+    <p>Entdecke passende Rezeptideen und finde schnell etwas Leckeres.</p>
   </section>
 
   {#if ingredientsFromUrl.length > 0}

@@ -8,6 +8,7 @@
     { href: "/recipes", label: "Rezepte" },
     { href: "/create", label: "Erstellen" },
     { href: "/favorites", label: "Favoriten" },
+    { href: "/login", label: "Login" },
   ];
 
   let { children } = $props();

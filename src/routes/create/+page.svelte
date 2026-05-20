@@ -62,7 +62,7 @@
     <h1>Rezept erstellen</h1>
     <p>
       Erfasse ein eigenes Rezept mit Zutaten, Zubereitung und
-      Basisinformationen. Später wird dieses Rezept in MongoDB gespeichert.
+      Basisinformationen. Danach kannst du es jederzeit wiederfinden.
     </p>
   </section>
 
