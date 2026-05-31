@@ -366,12 +366,21 @@ button {
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 1.2rem;
+  gap: 1.25rem;
+  align-items: stretch;
 }
 
 .recipe-card {
-  padding: 1.4rem;
-  border-radius: 1.8rem;
+  padding: 1.45rem;
+  border-radius: 0;
+}
+
+.recipe-card-image {
+  display: block;
+  width: calc(100% + 2.9rem);
+  height: 210px;
+  margin: -1.45rem -1.45rem 0;
+  object-fit: cover;
 }
 
 .recipe-card h2,
@@ -708,6 +717,7 @@ textarea:focus {
   display: flex;
   min-height: 100%;
   flex-direction: column;
+  gap: 1rem;
   border-radius: 0;
 }
 
@@ -717,6 +727,42 @@ textarea:focus {
   color: #1f1d1a;
   font-size: 1.25rem;
   font-weight: 750;
+  line-height: 1.2;
+}
+
+.recipe-card .meta {
+  margin: 0.55rem 0 0;
+}
+
+.recipe-card h2 {
+  display: -webkit-box;
+  min-height: 3rem;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.recipe-card .tags {
+  min-height: 2rem;
+  margin-bottom: 0;
+  overflow: hidden;
+}
+
+.recipe-card .tags span {
+  white-space: nowrap;
+}
+
+.recipe-card .ingredients-text {
+  display: -webkit-box;
+  min-height: 4.8rem;
+  margin: 0;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+}
+
+.recipe-card .recipe-button {
+  margin-top: auto;
 }
 
 .meta,

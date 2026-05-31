@@ -102,9 +102,14 @@
 
   function searchRecipes() {
     const params = new URLSearchParams();
+    const cleanedIngredient = ingredient.trim().toLowerCase();
+    const searchIngredients =
+      cleanedIngredient && !ingredients.includes(cleanedIngredient)
+        ? [...ingredients, cleanedIngredient]
+        : ingredients;
 
-    if (ingredients.length > 0) {
-      params.set("ingredients", ingredients.join(","));
+    if (searchIngredients.length > 0) {
+      params.set("ingredients", searchIngredients.join(","));
     }
 
     if (maxTime) {
@@ -145,7 +150,9 @@
             onkeydown={(e) => e.key === "Enter" && addIngredient()}
           />
 
-          <button class="add-button" onclick={addIngredient}>+</button>
+          <button class="add-button ingredient-add-button" onclick={addIngredient}>
+            Hinzufügen
+          </button>
         </div>
 
         {#if ingredients.length > 0}
@@ -161,12 +168,6 @@
                 </button>
               </span>
             {/each}
-          </div>
-        {:else}
-          <div class="empty-state">
-            <p>
-              Füge deine ersten Zutaten hinzu, um Rezeptvorschläge zu erhalten.
-            </p>
           </div>
         {/if}
 
@@ -432,24 +433,10 @@
     line-height: 1;
   }
 
-  .empty-state {
-    margin-top: 1rem;
-    padding: 0.85rem 0;
-    border: 0;
-    border-bottom: 1px solid #ece5da;
-    border-radius: 0;
-    background: transparent;
-    color: #6d655b;
-  }
-
-  .empty-state p {
-    margin: 0;
-    line-height: 1.5;
-  }
-
   .visual-card {
-    position: relative;
-    min-height: 560px;
+    display: grid;
+    gap: 1.2rem;
+    min-height: 0;
     padding: 0;
     border: 0;
     border-radius: 0;
@@ -474,22 +461,21 @@
   }
 
   .hero-image-small {
-    position: absolute;
-    right: 0;
-    bottom: 4.5rem;
-    width: 48%;
+    position: static;
+    width: 62%;
     height: 210px;
+    margin-top: -5rem;
+    margin-left: auto;
     border: 10px solid #faf8f4;
   }
 
   .mini-stats {
-    position: absolute;
-    left: 0;
-    right: 18%;
-    bottom: 0;
+    position: static;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 0;
+    width: 82%;
+    margin-top: 0.5rem;
     border: 1px solid #ece5da;
     background: rgba(255, 255, 255, 0.78);
   }
@@ -526,8 +512,13 @@
   }
 
   .home-page .add-button {
+    width: auto;
+    min-width: 8rem;
+    padding: 0 1rem;
     border-radius: 0;
     background: #1f1d1a;
+    color: white;
+    font-size: 0.95rem;
   }
 
   .home-page .add-button:hover {
@@ -562,8 +553,7 @@
     }
 
     .mini-stats {
-      position: static;
-      margin-top: 1rem;
+      width: 100%;
     }
   }
 

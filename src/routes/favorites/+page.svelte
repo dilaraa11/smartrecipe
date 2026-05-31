@@ -71,6 +71,10 @@
     <section class="recipe-grid">
       {#each favorites as recipe}
         <article class="recipe-card">
+          {#if recipe.imageUrl}
+            <img class="recipe-card-image" src={recipe.imageUrl} alt={recipe.title} />
+          {/if}
+
           <h2>{recipe.title}</h2>
           <p class="meta">{recipe.time} Min / {recipe.difficulty}</p>
 

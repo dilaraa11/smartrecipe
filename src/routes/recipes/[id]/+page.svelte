@@ -6,6 +6,7 @@
   let loading = $state(true);
   let error = $state("");
   let favoriteError = $state("");
+  let servings = $state<2 | 4>(2);
 
   async function loadRecipe() {
     try {
@@ -67,6 +68,10 @@
     </section>
   {:else if recipe}
     <section class="recipe-detail">
+      {#if recipe.imageUrl}
+        <img class="recipe-hero-image" src={recipe.imageUrl} alt={recipe.title} />
+      {/if}
+
       <div class="hero">
         <div>
           <p class="eyebrow">{recipe.category}</p>
@@ -95,13 +100,46 @@
       </div>
 
       <section class="card">
-        <h2>Zutaten</h2>
+        <div class="section-heading">
+          <h2>Zutaten</h2>
+          {#if recipe.ingredientAmounts?.length}
+            <div class="serving-switch" aria-label="Portionen auswählen">
+              <button
+                class:active={servings === 2}
+                type="button"
+                onclick={() => (servings = 2)}
+              >
+                2 Personen
+              </button>
+              <button
+                class:active={servings === 4}
+                type="button"
+                onclick={() => (servings = 4)}
+              >
+                4 Personen
+              </button>
+            </div>
+          {/if}
+        </div>
 
-        <ul>
-          {#each recipe.ingredients as ingredient}
-            <li>{ingredient}</li>
-          {/each}
-        </ul>
+        {#if recipe.ingredientAmounts?.length}
+          <ul class="ingredient-list">
+            {#each recipe.ingredientAmounts as ingredient}
+              <li>
+                <span>{ingredient.name}</span>
+                <strong>
+                  {servings === 2 ? ingredient.amount2 : ingredient.amount4}
+                </strong>
+              </li>
+            {/each}
+          </ul>
+        {:else}
+          <ul>
+            {#each recipe.ingredients as ingredient}
+              <li>{ingredient}</li>
+            {/each}
+          </ul>
+        {/if}
       </section>
 
       <section class="card">
@@ -118,6 +156,14 @@
     margin-bottom: 2rem;
     padding-bottom: 1.5rem;
     border-bottom: 1px solid #ece5da;
+  }
+
+  .recipe-hero-image {
+    display: block;
+    width: 100%;
+    max-height: 520px;
+    margin-bottom: 2rem;
+    object-fit: cover;
   }
 
   .recipe-detail .eyebrow {
@@ -161,5 +207,57 @@
     margin-top: 0.5rem;
     color: #1f1d1a;
     font-weight: 750;
+  }
+
+  .section-heading {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .section-heading h2 {
+    margin: 0;
+  }
+
+  .serving-switch {
+    display: flex;
+    border: 1px solid #ece5da;
+  }
+
+  .serving-switch button {
+    padding: 0.6rem 0.8rem;
+    background: transparent;
+    color: #68625a;
+    font-weight: 650;
+  }
+
+  .serving-switch button + button {
+    border-left: 1px solid #ece5da;
+  }
+
+  .serving-switch button.active,
+  .serving-switch button:hover {
+    background: #1f1d1a;
+    color: white;
+  }
+
+  .ingredient-list {
+    padding: 0;
+    list-style: none;
+  }
+
+  .ingredient-list li {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.65rem 0;
+    border-bottom: 1px solid #ece5da;
+  }
+
+  .ingredient-list strong {
+    color: #1f1d1a;
+    white-space: nowrap;
   }
 </style>

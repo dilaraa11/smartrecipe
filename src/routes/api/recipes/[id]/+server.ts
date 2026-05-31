@@ -4,6 +4,40 @@ import { getDb } from '$lib/server/db';
 import { getSessionUserId } from '$lib/server/session';
 import type { Cookies } from '@sveltejs/kit';
 
+function normalizeRecipe(recipe: any) {
+  const tags = recipe.tags ?? recipe.kategorien ?? [];
+  const ingredients = recipe.ingredients ?? recipe.zutaten ?? [];
+
+  return {
+    _id: recipe._id,
+    title: recipe.title ?? recipe.rezeptname ?? 'Unbenanntes Rezept',
+    time: recipe.time ?? recipe.dauer_in_minuten ?? 0,
+    difficulty: recipe.difficulty ?? recipe.schwierigkeit ?? 'Einfach',
+    tags,
+    ingredients: ingredients.map((ingredient: string | { name?: string }) =>
+      typeof ingredient === 'string' ? ingredient : ingredient.name ?? '',
+    ),
+    ingredientAmounts: ingredients
+      .filter((ingredient: string | { name?: string }) => typeof ingredient !== 'string')
+      .map(
+        (ingredient: {
+          name?: string;
+          menge_2_personen?: string;
+          menge_4_personen?: string;
+        }) => ({
+          name: ingredient.name ?? '',
+          amount2: ingredient.menge_2_personen ?? '',
+          amount4: ingredient.menge_4_personen ?? '',
+        }),
+      ),
+    emoji: recipe.emoji ?? '',
+    imageUrl: recipe.imageUrl ?? recipe.image_url ?? recipe.bildUrl ?? recipe.bild_url ?? '',
+    category: recipe.category ?? tags[0] ?? '',
+    instructions: recipe.instructions ?? recipe.zubereitung ?? '',
+    favorite: recipe.favorite ?? false,
+  };
+}
+
 type RouteParams = {
   params: {
     id: string;
@@ -43,7 +77,7 @@ export async function GET({ params, cookies }: RouteRequest) {
         )
       : false;
 
-    return json({ ...recipe, favorite });
+    return json({ ...normalizeRecipe(recipe), favorite });
   } catch (error) {
     console.error(error);
     return json({ error: 'Fehler beim Laden des Rezepts' }, { status: 500 });
