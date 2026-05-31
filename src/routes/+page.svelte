@@ -123,10 +123,10 @@
   }
 </script>
 
-<main class="page">
+<main class="page home-page">
   <section class="hero">
     <div class="hero-content">
-      <p class="eyebrow">Dein persönlicher Küchen-Assistent</p>
+      <p class="eyebrow">Rezeptsuche</p>
       <h1>Was kannst du heute kochen?</h1>
       <p class="subtitle">
         Füge deine vorhandenen Zutaten hinzu und finde passende Rezeptideen für
@@ -164,7 +164,6 @@
           </div>
         {:else}
           <div class="empty-state">
-            <span>🥕</span>
             <p>
               Füge deine ersten Zutaten hinzu, um Rezeptvorschläge zu erhalten.
             </p>
@@ -235,9 +234,16 @@
     </div>
 
     <div class="visual-card">
-      <div class="plate">🍳</div>
-      <h2>SmartRecipe</h2>
-      <p>Aus deinem Vorrat werden passende Mahlzeiten.</p>
+      <img
+        class="hero-image hero-image-main"
+        src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80"
+        alt="Bunte Bowl mit Gemüse"
+      />
+      <img
+        class="hero-image hero-image-small"
+        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=600&q=80"
+        alt="Frischer Salat mit Gemüse"
+      />
 
       <div class="mini-stats">
         <div>
@@ -254,56 +260,109 @@
 </main>
 
 <style>
+  .home-page {
+    padding: 3.5rem 1.5rem 4.5rem;
+    background: #faf8f4;
+    color: #1f1d1a;
+    font-family:
+      "Elms Sans",
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
   .hero {
-    max-width: 1120px;
-    min-height: calc(100vh - 6rem);
+    max-width: 1180px;
+    min-height: calc(100vh - 7rem);
     margin: 0 auto;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
-    gap: 3rem;
+    grid-template-columns: minmax(0, 1fr) minmax(320px, 0.82fr);
+    gap: 4.5rem;
     align-items: center;
   }
 
   h1 {
-    max-width: 720px;
+    max-width: 680px;
     margin: 0;
-    font-size: clamp(2.8rem, 6vw, 5.8rem);
-    line-height: 0.95;
-    letter-spacing: -0.06em;
-    color: #2f2418;
+    font-family:
+      "Amatic SC",
+      cursive;
+    font-size: clamp(4rem, 8vw, 7.5rem);
+    line-height: 0.88;
+    letter-spacing: 0;
+    color: #1f1d1a;
+    font-weight: 700;
+  }
+
+  .hero-content .eyebrow {
+    width: fit-content;
+    margin-bottom: 1rem;
+    padding: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #8a624b;
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
   }
 
   .subtitle {
-    max-width: 580px;
-    margin: 1.4rem 0 2rem;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: #6b5b4a;
+    max-width: 560px;
+    margin: 1.25rem 0 2rem;
+    color: #68625a;
+    font-size: 1.05rem;
+    line-height: 1.65;
   }
 
   .search-card,
   .visual-card {
-    border: 1px solid rgba(255, 255, 255, 0.8);
-    background: rgba(255, 255, 255, 0.72);
-    backdrop-filter: blur(18px);
-    box-shadow: 0 24px 70px rgba(120, 53, 15, 0.14);
+    border: 1px solid #ece5da;
+    background: rgba(255, 255, 255, 0.64);
+    box-shadow: none;
   }
 
   .search-card {
-    max-width: 620px;
-    padding: 1.4rem;
-    border-radius: 1.8rem;
+    max-width: 650px;
+    padding: 1.1rem 0;
+    border-width: 1px 0 0;
+    border-radius: 0;
+    background: transparent;
   }
 
   .search-card label {
     display: block;
     margin-bottom: 0.6rem;
+    color: #312f2c;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
+  .search-card input,
+  .search-card select {
+    min-height: 3.1rem;
+    border: 0;
+    border-bottom: 1px solid #cfc7bb;
+    border-radius: 0;
+    background-color: transparent;
+    color: #1f1d1a;
+    font-weight: 500;
+    padding: 0.85rem 0;
+  }
+
+  .search-card input:focus,
+  .search-card select:focus {
+    border-color: #1f1d1a;
+    box-shadow: none;
   }
 
   .filter-panel {
-    margin-top: 1.2rem;
-    padding-top: 1.2rem;
-    border-top: 1px solid rgba(253, 186, 116, 0.65);
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ece5da;
   }
 
   .filter-grid {
@@ -328,14 +387,14 @@
 
   .tag-add-button {
     width: 3.1rem;
-    border-radius: 1rem;
-    background: #fb923c;
+    border-radius: 0;
+    background: #1f1d1a;
     color: white;
     font-size: 1.35rem;
   }
 
   .tag-add-button:hover {
-    background: #ea580c;
+    background: #8a624b;
   }
 
   .filter-tags {
@@ -350,12 +409,13 @@
     align-items: center;
     gap: 0.45rem;
     margin: 0;
-    padding: 0.5rem 0.7rem;
-    border-radius: 999px;
-    background: rgba(255, 237, 213, 0.72);
-    color: #7c2d12;
+    padding: 0.45rem 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    color: #302d28;
     font-size: 0.9rem;
-    font-weight: 800;
+    font-weight: 650;
     cursor: pointer;
   }
 
@@ -365,7 +425,7 @@
     min-height: 0;
     padding: 0;
     flex: 0 0 auto;
-    accent-color: #fb923c;
+    accent-color: #1f1d1a;
   }
 
   .filter-chip span {
@@ -373,99 +433,137 @@
   }
 
   .empty-state {
-    margin-top: 1.2rem;
-    padding: 1.2rem;
-    border: 1px dashed #fdba74;
-    border-radius: 1.2rem;
-    background: rgba(255, 247, 237, 0.65);
-    text-align: center;
-    color: #7c5d3f;
-  }
-
-  .empty-state span {
-    font-size: 2rem;
+    margin-top: 1rem;
+    padding: 0.85rem 0;
+    border: 0;
+    border-bottom: 1px solid #ece5da;
+    border-radius: 0;
+    background: transparent;
+    color: #6d655b;
   }
 
   .empty-state p {
-    margin: 0.5rem 0 0;
+    margin: 0;
+    line-height: 1.5;
   }
 
   .visual-card {
     position: relative;
-    padding: 2rem;
-    border-radius: 2.2rem;
-    text-align: center;
-    overflow: hidden;
+    min-height: 560px;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
   }
 
-  .visual-card::before {
-    content: "";
+  .mini-stats strong {
+    font-family:
+      "Amatic SC",
+      cursive;
+  }
+
+  .hero-image {
+    display: block;
+    width: 100%;
+    object-fit: cover;
+    background: #ded7cb;
+  }
+
+  .hero-image-main {
+    height: 440px;
+  }
+
+  .hero-image-small {
     position: absolute;
-    inset: -30%;
-    background: radial-gradient(
-      circle,
-      rgba(251, 146, 60, 0.24),
-      transparent 55%
-    );
-    z-index: -1;
-  }
-
-  .plate {
-    width: 12rem;
-    height: 12rem;
-    margin: 0 auto 1.5rem;
-    display: grid;
-    place-items: center;
-    border-radius: 50%;
-    background: #fffaf3;
-    box-shadow:
-      inset 0 0 0 1.1rem #fef3c7,
-      0 22px 50px rgba(120, 53, 15, 0.12);
-    font-size: 5rem;
-  }
-
-  .visual-card h2 {
-    margin: 0 0 0.5rem;
-    font-size: 2rem;
-    color: #2f2418;
-  }
-
-  .visual-card p {
-    margin: 0;
-    color: #6b5b4a;
+    right: 0;
+    bottom: 4.5rem;
+    width: 48%;
+    height: 210px;
+    border: 10px solid #faf8f4;
   }
 
   .mini-stats {
+    position: absolute;
+    left: 0;
+    right: 18%;
+    bottom: 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-top: 1.8rem;
+    gap: 0;
+    border: 1px solid #ece5da;
+    background: rgba(255, 255, 255, 0.78);
   }
 
   .mini-stats div {
-    padding: 1rem;
-    border-radius: 1.2rem;
-    background: rgba(255, 250, 243, 0.8);
+    padding: 1rem 1.2rem;
+  }
+
+  .mini-stats div + div {
+    border-left: 1px solid #ece5da;
   }
 
   .mini-stats strong {
     display: block;
-    font-size: 1.7rem;
-    color: #ea580c;
+    color: #1f1d1a;
+    font-size: 1.8rem;
+    font-weight: 750;
   }
 
   .mini-stats span {
-    color: #6b5b4a;
-    font-size: 0.9rem;
+    color: #6d655b;
+    font-size: 0.85rem;
+  }
+
+  .home-page .primary-button {
+    border-radius: 0.25rem;
+    border-radius: 0;
+    background: #1f1d1a;
+    font-weight: 750;
+  }
+
+  .home-page .primary-button:hover {
+    background: #8a624b;
+  }
+
+  .home-page .add-button {
+    border-radius: 0;
+    background: #1f1d1a;
+  }
+
+  .home-page .add-button:hover {
+    background: #8a624b;
+  }
+
+  .home-page .tag {
+    border: 0;
+    border-bottom: 1px solid #cfc7bb;
+    border-radius: 0;
+    background: transparent;
+    color: #302d28;
+    font-weight: 650;
   }
 
   @media (max-width: 850px) {
     .hero {
       grid-template-columns: 1fr;
+      gap: 2rem;
     }
 
     .visual-card {
+      min-height: auto;
+    }
+
+    .hero-image-main {
+      height: 300px;
+    }
+
+    .hero-image-small {
       display: none;
+    }
+
+    .mini-stats {
+      position: static;
+      margin-top: 1rem;
     }
   }
 

@@ -54,7 +54,7 @@
 </script>
 
 <main class="page">
-  <a class="back-button" href="/">Zurueck zur Startseite</a>
+  <a class="back-button" href="/">Zurück zur Startseite</a>
 
   <section class="header">
     <p class="eyebrow">Benutzerkonto</p>
