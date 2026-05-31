@@ -56,10 +56,12 @@ button {
 
 .nav-links {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
 }
 
-.nav-links a {
+.nav-links a,
+.logout-button {
   padding: 0.6rem 0.9rem;
   border-radius: 999px;
   color: #6b5b4a;
@@ -68,9 +70,44 @@ button {
 }
 
 .nav-links a.active,
-.nav-links a:hover {
+.nav-links a:hover,
+.logout-button:hover {
   background: #ffedd5;
   color: #c2410c;
+}
+
+.logout-button {
+  background: transparent;
+}
+
+.profile-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.5rem;
+  padding: 0.35rem 0.75rem 0.35rem 0.4rem;
+  border-radius: 999px;
+  background: #fff7ed;
+  color: #4b3422;
+  font-weight: 800;
+}
+
+.profile-chip span {
+  width: 1.85rem;
+  height: 1.85rem;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #fb923c;
+  color: white;
+  font-size: 0.85rem;
+}
+
+.profile-chip strong {
+  max-width: 9rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .page {
@@ -300,6 +337,11 @@ button {
   background: #ea580c;
 }
 
+.primary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
 .recipe-button,
 .primary-button {
   width: 100%;
@@ -402,6 +444,16 @@ textarea:focus {
   background: rgba(34, 197, 94, 0.12);
   border: 1px solid rgba(34, 197, 94, 0.3);
   color: #166534;
+  font-weight: 700;
+}
+
+.error-message {
+  margin-top: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  background: rgba(220, 38, 38, 0.1);
+  border: 1px solid rgba(220, 38, 38, 0.28);
+  color: #991b1b;
   font-weight: 700;
 }
 

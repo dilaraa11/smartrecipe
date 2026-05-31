@@ -1,19 +1,55 @@
 <script lang="ts">
+  import { goto } from "$app/navigation";
+
   let mode = $state<"login" | "signup">("login");
   let name = $state("");
   let email = $state("");
   let password = $state("");
   let message = $state("");
+  let error = $state("");
+  let loading = $state(false);
 
-  function submitForm() {
-    message =
-      mode === "login"
-        ? "Login ist vorbereitet."
-        : "Registrierung ist vorbereitet.";
+  async function submitForm() {
+    message = "";
+    error = "";
+    loading = true;
 
-    name = "";
-    email = "";
-    password = "";
+    try {
+      const response = await fetch(
+        mode === "login" ? "/api/auth/login" : "/api/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+          }),
+        },
+      );
+      const result = await response.json();
+
+      if (!response.ok) {
+        error = result.error ?? "Etwas ist schiefgelaufen.";
+        return;
+      }
+
+      message =
+        mode === "login"
+          ? `Willkommen zurück, ${result.user.name}!`
+          : `Dein Konto wurde erstellt, ${result.user.name}!`;
+
+      name = "";
+      email = "";
+      password = "";
+      goto("/");
+    } catch {
+      error = "Verbindung fehlgeschlagen. Bitte versuche es erneut.";
+    } finally {
+      loading = false;
+    }
   }
 </script>
 
@@ -64,12 +100,19 @@
       <input bind:value={password} type="password" placeholder="Passwort" />
     </label>
 
-    <button class="primary-button" onclick={submitForm}>
-      {mode === "login" ? "Einloggen" : "Konto erstellen"}
+    <button class="primary-button" onclick={submitForm} disabled={loading}>
+      {#if loading}
+        Bitte warten...
+      {:else}
+        {mode === "login" ? "Einloggen" : "Konto erstellen"}
+      {/if}
     </button>
 
     {#if message}
       <div class="message">{message}</div>
+    {/if}
+    {#if error}
+      <div class="error-message">{error}</div>
     {/if}
   </section>
 </main>
