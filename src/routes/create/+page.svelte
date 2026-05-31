@@ -7,6 +7,26 @@
   let ingredients = $state<string[]>([]);
   let instructions = $state("");
   let successMessage = $state("");
+  let errorMessage = $state("");
+  let loadingUser = $state(true);
+  let isLoggedIn = $state(false);
+
+  async function loadCurrentUser() {
+    try {
+      const response = await fetch("/api/auth/me");
+      const result = await response.json();
+
+      isLoggedIn = Boolean(result.user);
+    } catch {
+      isLoggedIn = false;
+    } finally {
+      loadingUser = false;
+    }
+  }
+
+  $effect(() => {
+    loadCurrentUser();
+  });
 
   function addIngredient() {
     const cleaned = ingredient.trim();
@@ -22,6 +42,9 @@
   }
 
   async function saveRecipe() {
+    successMessage = "";
+    errorMessage = "";
+
     const recipe = {
       title,
       time: Number(time),
@@ -49,8 +72,11 @@
       category = "";
       ingredients = [];
       instructions = "";
+    } else if (response.status === 401) {
+      errorMessage = "Bitte logge dich ein, um Rezepte zu erstellen.";
     } else {
-      successMessage = "Fehler beim Speichern.";
+      const result = await response.json();
+      errorMessage = result.error ?? "Fehler beim Speichern.";
     }
   }
 </script>
@@ -66,6 +92,21 @@
     </p>
   </section>
 
+  {#if loadingUser}
+    <section class="status-card">
+      <p>Benutzerstatus wird geprüft...</p>
+    </section>
+  {:else if !isLoggedIn}
+    <section class="empty-card">
+      <div class="icon">🔒</div>
+      <h2>Bitte einloggen</h2>
+      <p>
+        Du brauchst ein Konto, um eigene Rezepte zu erstellen und später wieder
+        zu finden.
+      </p>
+      <a href="/login">Einloggen oder registrieren</a>
+    </section>
+  {:else}
   <section class="form-card">
     <div class="form-grid">
       <label>
@@ -139,6 +180,12 @@
         {successMessage}
       </div>
     {/if}
+    {#if errorMessage}
+      <div class="error-message">
+        {errorMessage}
+      </div>
+    {/if}
   </section>
+  {/if}
 </main>
 

@@ -5,6 +5,7 @@
     let recipe = $state<Recipe | null>(null);
     let loading = $state(true);
     let error = $state("");
+    let favoriteError = $state("");
 
     async function loadRecipe() {
         try {
@@ -30,6 +31,7 @@
     async function toggleFavorite() {
         if (!recipe || !recipe._id) return;
 
+        favoriteError = "";
         const newFavoriteValue = !recipe.favorite;
 
         const response = await fetch(`/api/recipes/${recipe._id}`, {
@@ -42,6 +44,10 @@
 
         if (response.ok) {
             recipe = { ...recipe, favorite: newFavoriteValue };
+        } else if (response.status === 401) {
+            favoriteError = "Bitte logge dich ein, um Favoriten zu speichern.";
+        } else {
+            favoriteError = "Favorit konnte nicht gespeichert werden.";
         }
     }
 
@@ -78,6 +84,10 @@
                             ? "❤️ Favorit entfernen"
                             : "🤍 Als Favorit speichern"}
                     </button>
+                    {#if favoriteError}
+                        <p class="favorite-error">{favoriteError}</p>
+                        <a class="login-link" href="/login">Zum Login</a>
+                    {/if}
                 </div>
             </div>
 
@@ -143,6 +153,19 @@
 
     p {
         line-height: 1.8;
+    }
+
+    .favorite-error {
+        margin: 0.8rem 0 0;
+        color: #991b1b;
+        font-weight: 800;
+    }
+
+    .login-link {
+        display: inline-block;
+        margin-top: 0.5rem;
+        color: #c2410c;
+        font-weight: 900;
     }
 
     @media (max-width: 700px) {

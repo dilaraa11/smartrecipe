@@ -4,20 +4,27 @@
   let favorites = $state<Recipe[]>([]);
   let loading = $state(true);
   let error = $state("");
+  let mustLogin = $state(false);
 
   async function loadFavorites() {
     try {
       loading = true;
       error = "";
+      mustLogin = false;
 
-      const response = await fetch("/api/recipes");
+      const response = await fetch("/api/favorites");
+
+      if (response.status === 401) {
+        mustLogin = true;
+        favorites = [];
+        return;
+      }
 
       if (!response.ok) {
         throw new Error("Favoriten konnten nicht geladen werden.");
       }
 
-      const recipes: Recipe[] = await response.json();
-      favorites = recipes.filter((recipe) => recipe.favorite === true);
+      favorites = await response.json();
     } catch (err) {
       error = "Beim Laden der Favoriten ist ein Fehler passiert.";
       console.error(err);
@@ -42,6 +49,13 @@
   {#if loading}
     <section class="status-card">
       <p>Favoriten werden geladen...</p>
+    </section>
+  {:else if mustLogin}
+    <section class="empty-card">
+      <div class="icon">🔒</div>
+      <h2>Bitte einloggen</h2>
+      <p>Favoriten sind nur verfügbar, wenn du angemeldet bist.</p>
+      <a href="/login">Zum Login</a>
     </section>
   {:else if error}
     <section class="status-card">

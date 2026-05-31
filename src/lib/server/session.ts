@@ -50,6 +50,12 @@ export function verifySessionToken(token: string) {
   }
 }
 
+export function getSessionUserId(cookies: Cookies) {
+  const token = cookies.get(cookieName);
+
+  return token ? verifySessionToken(token) : null;
+}
+
 export function setSessionCookie(cookies: Cookies, userId: string) {
   cookies.set(cookieName, createSessionToken(userId), {
     path: '/',
