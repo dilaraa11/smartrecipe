@@ -82,7 +82,8 @@
 </script>
 
 <main class="page">
-  <a class="back-button" href="/"> ← Zurück zur Suche </a>
+  <a class="back-button" href="/">Zurück zur Suche</a>
+
   <section class="header">
     <p class="eyebrow">Rezeptideen</p>
     <h1>Passende Rezepte entdecken</h1>
@@ -126,11 +127,9 @@
     <section class="recipe-grid">
       {#each filteredRecipes as recipe}
         <article class="recipe-card">
-          <div class="emoji">{recipe.emoji}</div>
-
           <div>
             <h2>{recipe.title}</h2>
-            <p class="meta">{recipe.time} Min · {recipe.difficulty}</p>
+            <p class="meta">{recipe.time} Min / {recipe.difficulty}</p>
           </div>
 
           <div class="tags">
@@ -151,4 +150,3 @@
     </section>
   {/if}
 </main>
-

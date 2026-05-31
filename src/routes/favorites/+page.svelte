@@ -39,7 +39,8 @@
 </script>
 
 <main class="page">
-  <a class="back-button" href="/recipes"> ← Zurück zu Rezepten </a>
+  <a class="back-button" href="/recipes">Zurück zu Rezepten</a>
+
   <section class="header">
     <p class="eyebrow">Gespeicherte Rezepte</p>
     <h1>Meine Favoriten</h1>
@@ -52,7 +53,6 @@
     </section>
   {:else if mustLogin}
     <section class="empty-card">
-      <div class="icon">🔒</div>
       <h2>Bitte einloggen</h2>
       <p>Favoriten sind nur verfügbar, wenn du angemeldet bist.</p>
       <a href="/login">Zum Login</a>
@@ -63,7 +63,6 @@
     </section>
   {:else if favorites.length === 0}
     <section class="empty-card">
-      <div class="icon">❤️</div>
       <h2>Noch keine Favoriten</h2>
       <p>Speichere Rezepte, die du gerne wieder kochen möchtest.</p>
       <a href="/recipes">Rezepte entdecken</a>
@@ -72,10 +71,8 @@
     <section class="recipe-grid">
       {#each favorites as recipe}
         <article class="recipe-card">
-          <div class="emoji">{recipe.emoji}</div>
-
           <h2>{recipe.title}</h2>
-          <p class="meta">{recipe.time} Min · {recipe.difficulty}</p>
+          <p class="meta">{recipe.time} Min / {recipe.difficulty}</p>
 
           <div class="tags">
             {#each recipe.tags as tag}
@@ -95,4 +92,3 @@
     </section>
   {/if}
 </main>
-

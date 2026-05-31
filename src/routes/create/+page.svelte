@@ -52,7 +52,7 @@
       category,
       tags: [category],
       ingredients,
-      emoji: "🍽️",
+      emoji: "",
       instructions,
     };
 
@@ -82,7 +82,8 @@
 </script>
 
 <main class="page">
-  <a class="back-button" href="/"> ← Zurück zur Startseite </a>
+  <a class="back-button" href="/">Zurück zur Startseite</a>
+
   <section class="header">
     <p class="eyebrow">Eigenes Rezept</p>
     <h1>Rezept erstellen</h1>
@@ -98,7 +99,6 @@
     </section>
   {:else if !isLoggedIn}
     <section class="empty-card">
-      <div class="icon">🔒</div>
       <h2>Bitte einloggen</h2>
       <p>
         Du brauchst ein Konto, um eigene Rezepte zu erstellen und später wieder
@@ -107,85 +107,81 @@
       <a href="/login">Einloggen oder registrieren</a>
     </section>
   {:else}
-  <section class="form-card">
-    <div class="form-grid">
-      <label>
-        Rezeptname
-        <input bind:value={title} placeholder="z.B. Tomaten-Omelett" />
-      </label>
+    <section class="form-card">
+      <div class="form-grid">
+        <label>
+          Rezeptname
+          <input bind:value={title} placeholder="z.B. Tomaten-Omelett" />
+        </label>
 
-      <label>
-        Dauer in Minuten
-        <input bind:value={time} type="number" placeholder="z.B. 20" />
-      </label>
+        <label>
+          Dauer in Minuten
+          <input bind:value={time} type="number" placeholder="z.B. 20" />
+        </label>
 
-      <label>
-        Schwierigkeit
-        <select bind:value={difficulty}>
-          <option>Einfach</option>
-          <option>Mittel</option>
-          <option>Schwer</option>
-        </select>
-      </label>
+        <label>
+          Schwierigkeit
+          <select bind:value={difficulty}>
+            <option>Einfach</option>
+            <option>Mittel</option>
+            <option>Schwer</option>
+          </select>
+        </label>
 
-      <label>
-        Kategorie
-        <input
-          bind:value={category}
-          placeholder="z.B. Vegetarisch, Pasta, Frühstück"
-        />
-      </label>
-    </div>
-
-    <div class="ingredient-section">
-      <label for="ingredient">Zutaten</label>
-
-      <div class="input-row">
-        <input
-          id="ingredient"
-          bind:value={ingredient}
-          placeholder="z.B. Eier"
-          onkeydown={(e) => e.key === "Enter" && addIngredient()}
-        />
-        <button class="add-button" onclick={addIngredient}>+</button>
+        <label>
+          Kategorie
+          <input
+            bind:value={category}
+            placeholder="z.B. Vegetarisch, Pasta, Frühstück"
+          />
+        </label>
       </div>
 
-      {#if ingredients.length > 0}
-        <div class="ingredients">
-          {#each ingredients as item}
-            <span class="tag">
-              {item}
-              <button onclick={() => removeIngredient(item)}>×</button>
-            </span>
-          {/each}
+      <div class="ingredient-section">
+        <label for="ingredient">Zutaten</label>
+
+        <div class="input-row">
+          <input
+            id="ingredient"
+            bind:value={ingredient}
+            placeholder="z.B. Eier"
+            onkeydown={(e) => e.key === "Enter" && addIngredient()}
+          />
+          <button class="add-button" onclick={addIngredient}>+</button>
         </div>
-      {:else}
-        <p class="hint">Noch keine Zutaten hinzugefügt.</p>
+
+        {#if ingredients.length > 0}
+          <div class="ingredients">
+            {#each ingredients as item}
+              <span class="tag">
+                {item}
+                <button onclick={() => removeIngredient(item)}>×</button>
+              </span>
+            {/each}
+          </div>
+        {:else}
+          <p class="hint">Noch keine Zutaten hinzugefügt.</p>
+        {/if}
+      </div>
+
+      <label>
+        Zubereitung
+        <textarea
+          bind:value={instructions}
+          placeholder="Beschreibe hier Schritt für Schritt die Zubereitung..."
+        ></textarea>
+      </label>
+
+      <button class="primary-button" onclick={saveRecipe}>
+        Rezept speichern
+      </button>
+
+      {#if successMessage}
+        <div class="message">{successMessage}</div>
       {/if}
-    </div>
-
-    <label>
-      Zubereitung
-      <textarea
-        bind:value={instructions}
-        placeholder="Beschreibe hier Schritt für Schritt die Zubereitung..."
-      ></textarea>
-    </label>
-
-    <button class="primary-button" onclick={saveRecipe}>
-      Rezept speichern
-    </button>
-    {#if successMessage}
-      <div class="message">
-        {successMessage}
-      </div>
-    {/if}
-    {#if errorMessage}
-      <div class="error-message">
-        {errorMessage}
-      </div>
-    {/if}
-  </section>
+      {#if errorMessage}
+        <div class="error-message">{errorMessage}</div>
+      {/if}
+    </section>
   {/if}
 </main>
-

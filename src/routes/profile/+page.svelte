@@ -27,7 +27,6 @@
     </section>
   {:else if !user}
     <section class="empty-card">
-      <div class="icon">🔒</div>
       <h2>Bitte einloggen</h2>
       <p>Du brauchst ein Konto, um dein Profil anzusehen.</p>
       <a href="/login">Zum Login</a>

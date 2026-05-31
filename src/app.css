@@ -1,5 +1,6 @@
 :root {
   font-family:
+    "Elms Sans",
     Inter,
     ui-sans-serif,
     system-ui,
@@ -7,8 +8,8 @@
     BlinkMacSystemFont,
     "Segoe UI",
     sans-serif;
-  color: #2f2418;
-  background: #fff7ed;
+  color: #1f1d1a;
+  background: #faf8f4;
 }
 
 *,
@@ -19,7 +20,7 @@
 
 body {
   margin: 0;
-  background: #fff7ed;
+  background: #faf8f4;
 }
 
 button,
@@ -143,7 +144,7 @@ button {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  padding: 0.45rem 0.45rem 0.85rem;
+  padding: 0.75rem 0.45rem;
   border-bottom: 1px solid #ece5da;
   text-decoration: none;
 }
@@ -178,7 +179,7 @@ button {
   white-space: nowrap;
 }
 
-.profile-dropdown a,
+.profile-dropdown a:not(.profile-summary),
 .profile-dropdown button {
   display: block;
   width: 100%;
@@ -193,8 +194,12 @@ button {
   text-decoration: none;
 }
 
-.profile-dropdown a:hover,
+.profile-dropdown a:not(.profile-summary):hover,
 .profile-dropdown button:hover {
+  background: #faf8f4;
+}
+
+.profile-summary:hover {
   background: #faf8f4;
 }
 
@@ -367,17 +372,6 @@ button {
 .recipe-card {
   padding: 1.4rem;
   border-radius: 1.8rem;
-}
-
-.emoji {
-  width: 4.5rem;
-  height: 4.5rem;
-  display: grid;
-  place-items: center;
-  border-radius: 1.4rem;
-  background: #fff7ed;
-  font-size: 2.4rem;
-  margin-bottom: 1rem;
 }
 
 .recipe-card h2,
@@ -617,4 +611,198 @@ textarea:focus {
   .add-button {
     width: 100%;
   }
+}
+
+/* Shared calmer visual system for all non-home pages */
+.page {
+  background: #faf8f4;
+  color: #1f1d1a;
+  font-family:
+    "Elms Sans",
+    Inter,
+    ui-sans-serif,
+    system-ui,
+    sans-serif;
+}
+
+.header,
+.form-card,
+.recipe-detail,
+.status-card,
+.empty-card {
+  max-width: 980px;
+}
+
+.header {
+  margin-bottom: 2.2rem;
+}
+
+.eyebrow {
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #8a624b;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.header h1,
+.recipe-detail h1 {
+  font-family:
+    "Amatic SC",
+    cursive;
+  font-size: clamp(4rem, 7vw, 7rem);
+  font-weight: 700;
+  line-height: 0.9;
+  color: #1f1d1a;
+}
+
+.header p,
+.empty-card p,
+.status-card p {
+  color: #68625a;
+  font-size: 1.02rem;
+  line-height: 1.65;
+}
+
+.back-button {
+  padding: 0 0 0.25rem;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  color: #68625a;
+  font-weight: 650;
+  text-decoration: none;
+  border-bottom: 1px solid #cfc7bb;
+}
+
+.back-button:hover {
+  background: transparent;
+  color: #1f1d1a;
+  border-color: #1f1d1a;
+}
+
+.form-card,
+.recipe-card,
+.card,
+.status-card,
+.empty-card,
+.active-search {
+  background: rgba(255, 255, 255, 0.64);
+  backdrop-filter: none;
+  border: 1px solid #ece5da;
+  box-shadow: none;
+}
+
+.form-card,
+.card,
+.status-card,
+.empty-card,
+.active-search {
+  border-radius: 0;
+}
+
+.recipe-card {
+  display: flex;
+  min-height: 100%;
+  flex-direction: column;
+  border-radius: 0;
+}
+
+.recipe-card h2,
+.empty-card h2,
+.card h2 {
+  color: #1f1d1a;
+  font-size: 1.25rem;
+  font-weight: 750;
+}
+
+.meta,
+.ingredients-text,
+.hint {
+  color: #68625a;
+}
+
+.active-search span,
+.tags span,
+.tag {
+  border: 0;
+  border-bottom: 1px solid #cfc7bb;
+  border-radius: 0;
+  background: transparent;
+  color: #302d28;
+  font-weight: 650;
+}
+
+.tag button {
+  background: transparent;
+  color: #68625a;
+}
+
+.recipe-button,
+.primary-button,
+.favorite-button,
+.empty-card a {
+  border-radius: 0;
+  background: #1f1d1a;
+  color: white;
+  font-weight: 750;
+}
+
+.recipe-button:hover,
+.primary-button:hover,
+.favorite-button:hover,
+.empty-card a:hover,
+.add-button:hover {
+  background: #8a624b;
+}
+
+input,
+select,
+textarea {
+  border: 0;
+  border-bottom: 1px solid #cfc7bb;
+  border-radius: 0;
+  background: transparent;
+  color: #1f1d1a;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #1f1d1a;
+  box-shadow: none;
+}
+
+.add-button {
+  border-radius: 0;
+  background: #1f1d1a;
+}
+
+.message,
+.error-message {
+  border-radius: 0;
+}
+
+.auth-switch {
+  border: 1px solid #ece5da;
+  border-radius: 0;
+  background: transparent;
+}
+
+.auth-switch button {
+  border-radius: 0;
+  color: #68625a;
+}
+
+.auth-switch button.active,
+.auth-switch button:hover {
+  background: #1f1d1a;
+  color: white;
+}
+
+.icon {
+  display: none;
 }

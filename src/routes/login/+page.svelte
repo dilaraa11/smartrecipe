@@ -66,7 +66,7 @@
   </section>
 
   <section class="form-card auth-card">
-    <div class="auth-switch" aria-label="Login oder Registrierung auswaehlen">
+    <div class="auth-switch" aria-label="Login oder Registrierung auswählen">
       <button
         class:active={mode === "login"}
         type="button"
