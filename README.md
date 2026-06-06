@@ -110,27 +110,161 @@ Diese Variante bietet den grössten Mehrwert für die Zielgruppe und unterstütz
 Beschreibt die Gestaltung und Interaktion.
 > **Hinweis:** Hier wird der **Prototyp** beschrieben, nicht das **Mockup**.
 - **Informationsarchitektur:** _[z. B. Seiten/Navigation: Konzept, nicht die technische Umsetzung]_
-- **User Interface Design:** _[wichtige Screens: Screenshots mit kurzen Erläuterungen]_  
+Die Navigation ist über eine zentrale Menüleiste im oberen Bereich der Anwendung umgesetzt. Dadurch können Nutzer jederzeit schnell zwischen den wichtigsten Funktionen wechseln.
+
+   Die Navigation umfasst folgende Bereiche:
+
+   - Home: Rezeptsuche anhand vorhandener Zutaten
+   - Rezepte: Übersicht aller verfügbaren Rezepte
+   - Erstellen: Erfassung neuer Rezepte
+   - Meine Rezepte: Übersicht der selbst erstellten Rezepte
+   - Favoriten: Gespeicherte Lieblingsrezepte
+   - Profilbereich: Persönliche Kontoinformationen und Kontoverwaltung
+
+<img width="1256" height="43" alt="image" src="https://github.com/user-attachments/assets/f4ddc1a9-5889-4974-956b-2f0a36b81599" />
+
+- **User Interface Design:** _[wichtige Screens: Screenshots mit kurzen Erläuterungen]_
+  Startseite: Die Startseite dient als zentraler Einstiegspunkt der Anwendung. Nutzer können vorhandene Zutaten eingeben und die Rezeptsuche mithilfe verschiedener Filter wie Zubereitungszeit, Schwierigkeit oder Kategorien einschränken. Ziel ist es, schnell passende Rezeptvorschläge zu finden.
+  <img width="1249" height="599" alt="image" src="https://github.com/user-attachments/assets/9959ce95-1665-4f65-93d7-649e3763f8fb" />
+  Rezeptübersicht: Die Rezeptübersicht zeigt alle verfügbaren Rezepte in einer übersichtlichen Darstellung. Nutzer können durch die Sammlung stöbern und einzelne Rezepte für weitere Informationen öffnen.
+  <img width="2504" height="1251" alt="image" src="https://github.com/user-attachments/assets/c8edc201-f191-48bd-a3d8-5792321c9fa3" />
+  Rezeptdetailseite: Die Rezeptdetailseite enthält alle relevanten Informationen zu einem Rezept. Dazu gehören Zutaten, Mengenangaben, Zubereitungsschritte sowie ein Bild des Gerichts. Angemeldete Nutzer können Rezepte zusätzlich als Favoriten speichern.
+  <img width="2516" height="1242" alt="image" src="https://github.com/user-attachments/assets/1073c39b-faaa-4732-a370-80f276f74e24" />
+  Rezept erstellen: Auf dieser Seite können registrierte Nutzer eigene Rezepte erfassen. Neben den Grundinformationen wie Name, Dauer und Schwierigkeit können Zutaten, Zubereitungsschritte und ein Bild des Gerichts hinzugefügt werden.
+  <img width="2514" height="1253" alt="image" src="https://github.com/user-attachments/assets/fdfc923a-1a56-4e35-bb35-d2c6d990c45d" />
+  Meine Rezepte: Die Seite „Meine Rezepte“ bietet eine Übersicht aller selbst erstellten Rezepte eines Benutzers. Dadurch können persönliche Rezepte einfach verwaltet und jederzeit wieder aufgerufen werden.
+  <img width="2510" height="1216" alt="image" src="https://github.com/user-attachments/assets/8aae5e0b-ef84-4592-b626-fd12b0051949" />
+  Meine Favoriten: Hier werden alle vom Benutzer gespeicherten Lieblingsrezepte angezeigt. Die Favoritenfunktion ermöglicht einen schnellen Zugriff auf häufig genutzte oder interessante Rezepte.
+  <img width="2503" height="1238" alt="image" src="https://github.com/user-attachments/assets/c3d9799d-38b7-4034-b154-98da2ba6d7fc" />
+  Login / Registrierung Seite: Über die Login- und Registrierungsseite können Benutzer ein Konto erstellen oder sich anmelden. Erst nach erfolgreicher Anmeldung stehen personalisierte Funktionen wie Favoriten, eigene Rezepte und das Profil zur Verfügung.
+  <img width="2521" height="1243" alt="image" src="https://github.com/user-attachments/assets/867ccbd4-6a58-4e61-8aed-491448e18ce4" />
+  Profilseite: Die Profilseite enthält die persönlichen Kontoinformationen des Benutzers. Zusätzlich können Benutzer ihr Passwort ändern und ihr Profilbild verwalten.
+  <img width="2514" height="1236" alt="image" src="https://github.com/user-attachments/assets/f0ca538d-2b8d-49e7-9234-d19baadc1043" />
+
 - **Designentscheidungen:** _[zentrale Entscheidungen und Begründungen]_
+Die visuelle Gestaltung von SmartRecipe wurde teilweise von der Rezeptplattform Fooby inspiriert. Insbesondere die grossen Titel, die minimalistische Gestaltung und die übersichtliche Struktur dienten als Vorbild. Die Funktionen und die konkrete Umsetzung wurden jedoch eigenständig entwickelt und an die Bedürfnisse der Zielgruppe angepasst.
+
+    Zentrale Designentscheidungen:
+
+    - Verwendung eines minimalistischen Layouts mit viel Weissraum, um die Inhalte übersichtlich darzustellen.
+    - Grosse und auffällige Überschriften sorgen für eine klare Orientierung auf den einzelnen Seiten.
+    - Die Rezeptsuche anhand vorhandener Zutaten wurde bewusst auf der Startseite platziert, da sie die Kernfunktion der Anwendung darstellt.
+    - Bilder werden verwendet, um Rezepte visuell ansprechender darzustellen und die Wiedererkennung zu verbessern.
+    - Die Navigation wurde einfach gehalten und umfasst nur die wichtigsten Bereiche der Anwendung.
+    - Persönliche Funktionen wie Favoriten, eigene Rezepte und Profilinformationen sind nur für angemeldete Benutzer verfügbar, um eine individuelle Nutzung zu ermöglichen.
+    - Das Design wurde auf allen Seiten konsistent umgesetzt, um die Bedienung möglichst intuitiv zu gestalten.
 
 #### 3.4.2. Umsetzung (Technik)
 Fasst die technische Realisierung zusammen.
 - **Technologie-Stack:** _[SvelteKit, Bibliotheken falls genutzt]_
-- **Tooling:** _[IDE/Erweiterungen, lokale/Cloud-Tools; den Einsatz von KI beschreiben Sie im Kapitel **KI-Deklaration**]_  
+     Für die Entwicklung der Anwendung wurde SvelteKit als Fullstack-Framework verwendet. Die Programmlogik wurde mit TypeScript umgesetzt. Zur Speicherung der Daten kommt eine MongoDB-Datenbank zum Einsatz. Das Deployment der Anwendung erfolgt über Netlify.
+
+  Verwendete Technologien:
+
+  - SvelteKit
+  - TypeScript
+  - MongoDB Atlas
+  - Netlify
+  - GitHub
+
+
+- **Tooling:** _[IDE/Erweiterungen, lokale/Cloud-Tools; den Einsatz von KI beschreiben Sie im Kapitel **KI-Deklaration**]_
+   Für die Entwicklung wurden folgende Werkzeuge eingesetzt:
+
+  - Visual Studio Code als Entwicklungsumgebung
+  - Git für die Versionsverwaltung
+  - GitHub zur Verwaltung des Quellcodes
+  - MongoDB Atlas als Cloud-Datenbank
+  - Netlify für das Deployment der Anwendung
+
 - **Struktur & Komponenten:** _[Seiten, Routen, State/Stores, wichtige Komponenten]_
+   Die Anwendung besteht aus mehreren Hauptbereichen:
+
+  - Startseite mit Zutaten-Suche und Filtern
+  - Rezeptübersicht
+  - Rezeptdetailseiten
+  - Favoritenverwaltung
+  - Eigene Rezepte
+  - Profilbereich
+  - Login und Registrierung
+
+   Zusätzlich wurden API-Endpunkte für die Verwaltung von Rezepten, Benutzern und Favoriten implementiert.
+  
 - **Daten & Schnittstellen:** _[Wie werden Daten gespeichert, verwaltet, abgerufen?]_
-- **Deployment:** _[URL]_  
+   Die Daten werden in einer MongoDB-Datenbank gespeichert.
+
+   Gespeichert werden unter anderem:    
+
+   - Benutzerkonten
+   - Rezepte
+   - Favoriten
+
+   Die Kommunikation zwischen Frontend und Datenbank erfolgt über API-Endpunkte innerhalb von SvelteKit. Benutzer können Rezepte abrufen, erstellen und verwalten. Favoriten werden benutzerbezogen gespeichert.
+
+- **Deployment:** _[URL]_
+    https://smartrecipe-dilara.netlify.app/
+  
 - **Besondere Entscheidungen:** _[z. B. Trade-offs, Vereinfachungen]_  
+    - Für persönliche Funktionen wie Favoriten, eigene Rezepte und Profilinformationen wurde eine Benutzeranmeldung implementiert.
+    - Rezeptbilder werden lokal innerhalb des Projekts gespeichert und über den Static-Ordner bereitgestellt.
+    - Die Suche anhand vorhandener Zutaten wurde als zentrale Kernfunktion direkt auf der Startseite platziert.
+    - Das Design wurde bewusst einfach und übersichtlich gehalten, um eine intuitive Bedienung zu ermöglichen.
+    - Für die visuelle Gestaltung diente die Rezeptplattform Fooby als Inspiration.
 
 ### 3.5 Validate
 - **URL der getesteten Version** (separat deployt) : https://6a0d738ffc371f24ed47e821--smartrecipe-dilara.netlify.app/
-- **Ziele der Prüfung:** _[welche Fragen sollen beantwortet werden?]_  
-- **Vorgehen:** _[moderiert/unmoderiert; remote/on-site]_  
-- **Stichprobe:** _[Mit wem wurde getestet? Profil; Anzahl]_  
-- **Aufgaben/Szenarien:** _[Ausformulierte Testaufgaben]_  
-- **Kennzahlen & Beobachtungen:** _[z. B. Erfolgsquote, Zeitbedarf, qualitative Findings]_  
-- **Zusammenfassung der Resultate:** _[Wichtigste Erkenntnisse; 2-4 Sätze]_  
-- **Abgeleitete Verbesserungen:** _[Anforderungen, die als nächstes umgesetzt werden sollten, priorisiert, kurz begründet; falls Verbesserungen im Prototyp konkret umgesetzt wurden: In Kap. 4 dokumentieren]_  
+  <img width="925" height="414" alt="image" src="https://github.com/user-attachments/assets/d809c153-5fbe-4eb8-88cc-ac30cf87326f" />
+  <img width="1055" height="590" alt="image" src="https://github.com/user-attachments/assets/ec039821-571d-4bdd-873b-c3c773f8cb10" />
+  <img width="1021" height="536" alt="image" src="https://github.com/user-attachments/assets/2b969863-7a57-45f8-82da-173de8d341d5" />
+
+- **Ziele der Prüfung:** _[welche Fragen sollen beantwortet werden?]_
+    - Was hat gut funktioniert?
+    - Was hat gefallen?
+    - Was hat nich/schlecht funktioniert?
+    - Was hat gestört?
+    - Was hat gefehlt(Funktionen, Optionen, Infos, ...)?
+    - Welche neuen Ideen, Anforderungen sind aufgekommen?
+    - Was war unklar (Abfolge, Benennungen, Worte, Texte,...)?
+    - Welche Fragen sind aufgetaucht?
+
+- **Vorgehen:** _[moderiert/unmoderiert; remote/on-site]_
+     Die Evaluation wurde als moderierter Usability-Test durchgeführt. Die Testpersonen erhielten verschiedene Aufgaben, wie die Suche nach Rezepten, das Filtern von Ergebnissen, das Speichern von Favoriten sowie das Erstellen eigener Rezepte. Während des Tests wurden Beobachtungen protokolliert und anschliessend mittels Feedback Grid ausgewertet. 
+- **Stichprobe:** _[Mit wem wurde getestet? Profil; Anzahl]_
+     - 3 Testpersonen
+     - Studierende zwischen 20 und 30 Jahren
+     - Unterschiedliche Vorkenntnisse im Umgang mit Rezeptplattformen
+- **Aufgaben/Szenarien:** _[Ausformulierte Testaufgaben]_
+1. Melde dich an und rufe dein Profil auf.
+2. Suche passende Rezepte anhand vorhandener Zutaten.
+3. Verwende die Filterfunktionen zur Einschränkung der Suchergebnisse.
+4. Öffne ein Rezept und speichere es als Favorit.
+5. Erstelle ein eigenes Rezept.
+6. Öffne die Favoritenübersicht.
+7. Öffne die Seite „Meine Rezepte“.
+     
+- **Kennzahlen & Beobachtungen:** _[z. B. Erfolgsquote, Zeitbedarf, qualitative Findings]_
+    - Alle Testpersonen konnten die Hauptaufgaben erfolgreich abschliessen.
+    - Die Rezeptsuche wurde von allen Testpersonen als verständlich und intuitiv wahrgenommen.
+    - Das Filtern von Rezepten funktionierte problemlos.
+    - Die Favoritenfunktion wurde ohne Schwierigkeiten verstanden und genutzt.
+    - Das Erstellen eigener Rezepte wurde als einfach und selbsterklärend bewertet.
+    - Die Übersichtlichkeit der Anwendung wurde positiv hervorgehoben.
+
+    Identifizierte Schwachstellen:
+    - Die Bezeichnung „Tags“ wurde von mehreren Testpersonen nicht sofort verstanden.
+    - Bei Rezepten fehlten teilweise Angaben zu Mengen und Zubereitungsdetails.
+    - Die Bearbeitung bereits erfasster Zutaten innerhalb eines neuen Rezepts wurde vermisst.
+    - Mehrere Testpersonen wünschten sich Bilder bei allen Rezepten.
+    - Die Suche innerhalb der allgemeinen Rezeptübersicht wurde als mögliche Erweiterung vorgeschlagen.
+- **Zusammenfassung der Resultate:** _[Wichtigste Erkenntnisse; 2-4 Sätze]_
+    Die Evaluation zeigte, dass die Kernfunktionen der Anwendung verständlich und einfach bedienbar sind. Besonders positiv wurden die Zutaten-Suche, die Filtermöglichkeiten, die Favoritenfunktion sowie die Erstellung eigener Rezepte bewertet. Die Benutzeroberfläche wurde als übersichtlich und intuitiv wahrgenommen. Gleichzeitig konnten mehrere Verbesserungspotenziale identifiziert werden, insbesondere bei der Benennung der Tags sowie bei zusätzlichen Informationen innerhalb der Rezepte.
+- **Abgeleitete Verbesserungen:** _[Anforderungen, die als nächstes umgesetzt werden sollten, priorisiert, kurz begründet; falls Verbesserungen im Prototyp konkret umgesetzt wurden: In Kap. 4 dokumentieren]_
+    - Umbenennung oder bessere Erklärung der Tags/Kategorien.
+    - Ergänzung fehlender Mengen- und Zeitangaben bei Rezepten.
+    - Möglichkeit zur Bearbeitung bereits hinzugefügter Zutaten beim Erstellen eines Rezepts.
+    - Ergänzung von Bildern für alle Rezepte.
+    - Erweiterung der Suchfunktion innerhalb der Rezeptübersicht.
+    - Weitere Optimierung der Benutzerfreundlichkeit bei der Rezepterstellung.
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
@@ -164,14 +298,44 @@ Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im 
 
 ### 6.1 KI-Tools
 - **Eingesetzte Tools**: _[z. B. Copilot, ChatGPT, Claude, lokale Modelle; Version/Variante wenn bekannt]_
+   - ChatGPT (OpenAI)
+   - Claude (Anthropic)
+   - Codex innerhalb von Visual Studio Code
 - **Zweck & Umfang**: _[wie, wofür und in welchem Ausmass wurde KI eingesetzt (z. B. Textentwürfe, Codevorschläge, Tests, Refactoring); welche Teile stammen (ganz/teilweise) aus KI-Unterstützung?]_
+    KI wurde während der Entwicklung in unterschiedlichen Phasen eingesetzt.
+
+   - ChatGPT und Claude wurden insbesondere für die Erstellung des technischen Grundgerüsts, für Architekturfragen, Problemlösungen sowie für einzelne Codebeispiele verwendet.
+   - Codex wurde direkt in Visual Studio Code für die Weiterentwicklung der Anwendung, die Implementierung zusätzlicher Funktionen, Refactorings sowie Designanpassungen eingesetzt.
+   - ChatGPT wurde zusätzlich zur Erstellung von Textentwürfen für die Projektdokumentation verwendet.
+   - Die Bilder der Rezepte wurden mithilfe von KI (ChatGPT) generiert und anschliessend in die Anwendung integriert.
+
+    Die durch KI erzeugten Vorschläge wurden jeweils geprüft, angepasst und in die bestehende Anwendung integriert.
 - **Eigene Leistung (Abgrenzung):** _[was ist eigenständig erarbeitet/überarbeitet worden?]_
+   Die fachliche Konzeption, die Definition der Anforderungen, die Auswahl der Funktionen, die Gestaltung der Benutzeroberfläche, die Evaluation sowie die Integration der einzelnen Komponenten wurden eigenständig durchgeführt.
+
+Die von den KI-Systemen vorgeschlagenen Lösungen wurden analysiert, angepasst, getestet und in den Gesamtkontext des Projekts eingebettet. Die finale Anwendung stellt somit eine eigenständige Umsetzung der Projektidee dar.
 
 ### 6.2 Prompt-Vorgehen
 _[Überlegungen zu Prompt-Vorgehen, Qualität und Urheberrecht/Quellen. Wie wurde beim Prompting vorgegangen? Zu beschreiben ist die grundlegende Vorgehensweise. Einzelne, konkrete Prompts sollten höchstens als Beispiele aufgeführt werden. ]_
+  KI wurde iterativ eingesetzt. Dabei wurden Anforderungen, gewünschte Funktionen sowie technische Probleme schrittweise beschrieben und konkretisiert. Die generierten Antworten dienten als Grundlage für die weitere Entwicklung und wurden anschliessend überprüft, getestet und gegebenenfalls angepasst.
+
+  Der Schwerpunkt lag auf:
+
+ - Entwicklung einzelner Funktionen
+ - Fehleranalyse und Debugging
+ - Verbesserung der Benutzeroberfläche
+ - Optimierung bestehender Komponenten
+ - Generierung von Rezeptbildern
+
+Die Qualität der generierten Ergebnisse wurde jeweils durch eigene Tests und manuelle Überprüfung sichergestellt.
 
 ### 6.3 Reflexion
 _[Nutzen, Grenzen, Risiken/Qualitätssicherung, ...]_
+  Der Einsatz von KI ermöglichte eine deutlich schnellere Entwicklung des Prototyps und unterstützte insbesondere bei technischen Fragestellungen sowie bei der Umsetzung einzelner Funktionen. Zudem konnten verschiedene Lösungsansätze effizient verglichen und bewertet werden.
+
+  Gleichzeitig war eine kritische Überprüfung der generierten Vorschläge notwendig, da nicht alle Lösungen direkt korrekt oder optimal auf das Projekt anwendbar waren. Insbesondere bei der technischen Umsetzung mussten Vorschläge häufig angepasst, erweitert oder korrigiert werden.
+
+  Insgesamt erwies sich der Einsatz von KI als wertvolle Unterstützung bei der Entwicklung des Projekts. Die Verantwortung für Konzeption, Integration, Qualitätssicherung und finale Entscheidungen lag jedoch jederzeit bei der Projektverfasserin. 
 
 ## 7. Anhang [Optional]
 Beispiele:
