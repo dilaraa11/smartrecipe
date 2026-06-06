@@ -3,9 +3,59 @@ import { getDb } from '$lib/server/db';
 import { getSessionUserId } from '$lib/server/session';
 import type { Cookies } from '@sveltejs/kit';
 
+function scaleAmount(amount: string, factor: number) {
+  const match = amount.match(/(\d+(?:[.,]\d+)?)/);
+
+  if (!match) {
+    return amount;
+  }
+
+  const originalNumber = match[1];
+  const scaled = Number(originalNumber.replace(',', '.')) * factor;
+  const formatted = Number.isInteger(scaled)
+    ? String(scaled)
+    : scaled.toFixed(1).replace(/\.0$/, '');
+  const localized = originalNumber.includes(',')
+    ? formatted.replace('.', ',')
+    : formatted;
+
+  return amount.replace(originalNumber, localized);
+}
+
+function getIngredientAmounts(
+  ingredients: (string | {
+    name?: string;
+    amount?: string;
+    menge_2_personen?: string;
+    menge_4_personen?: string;
+  })[],
+  baseServings: 2 | 4,
+) {
+  return ingredients
+    .filter((ingredient) => typeof ingredient !== 'string')
+    .map((ingredient) => {
+      if (ingredient.menge_2_personen || ingredient.menge_4_personen) {
+        return {
+          name: ingredient.name ?? '',
+          amount2: ingredient.menge_2_personen ?? '',
+          amount4: ingredient.menge_4_personen ?? '',
+        };
+      }
+
+      const amount = ingredient.amount ?? '';
+
+      return {
+        name: ingredient.name ?? '',
+        amount2: baseServings === 2 ? amount : scaleAmount(amount, 0.5),
+        amount4: baseServings === 4 ? amount : scaleAmount(amount, 2),
+      };
+    });
+}
+
 function normalizeRecipe(recipe: any) {
   const tags = recipe.tags ?? recipe.kategorien ?? [];
   const ingredients = recipe.ingredients ?? recipe.zutaten ?? [];
+  const baseServings = recipe.baseServings === 4 ? 4 : 2;
 
   return {
     _id: recipe._id,
@@ -16,19 +66,7 @@ function normalizeRecipe(recipe: any) {
     ingredients: ingredients.map((ingredient: string | { name?: string }) =>
       typeof ingredient === 'string' ? ingredient : ingredient.name ?? '',
     ),
-    ingredientAmounts: ingredients
-      .filter((ingredient: string | { name?: string }) => typeof ingredient !== 'string')
-      .map(
-        (ingredient: {
-          name?: string;
-          menge_2_personen?: string;
-          menge_4_personen?: string;
-        }) => ({
-          name: ingredient.name ?? '',
-          amount2: ingredient.menge_2_personen ?? '',
-          amount4: ingredient.menge_4_personen ?? '',
-        }),
-      ),
+    ingredientAmounts: getIngredientAmounts(ingredients, baseServings),
     emoji: recipe.emoji ?? '',
     imageUrl: recipe.imageUrl ?? recipe.image_url ?? recipe.bildUrl ?? recipe.bild_url ?? '',
     category: recipe.category ?? tags[0] ?? '',
