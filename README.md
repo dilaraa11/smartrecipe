@@ -6,7 +6,7 @@
 2. [Lösungsidee](#2-lösungsidee)
 3. [Vorgehen & Artefakte](#3-vorgehen--artefakte)
     1. [Understand & Define](#31-understand--define)
-    2. [Sketch](#32-sketch)
+    2.  [Sketch](#32-sketch)
     3. [Decide](#33-decide)
     4. [Prototype](#34-prototype)
     5. [Validate](#35-validate)
@@ -52,6 +52,10 @@ Die Durchführung erfolgt phasenbasiert; dokumentieren Sie die wichtigsten Ergeb
 
 ### 3.1 Understand & Define
 - **Zielgruppenverständnis:** _[Problemraumanalyse, Recherche, (Proto-)Personas]_
+  <img width="1021" height="537" alt="image" src="https://github.com/user-attachments/assets/ce93961f-5347-47ab-814f-c83035f7cf18" />
+  <img width="983" height="786" alt="image" src="https://github.com/user-attachments/assets/ac0c493b-8a85-4378-93bc-d383b29571f4" />
+
+
 Zu Beginn wurde das Problem analysiert, dass viele Personen zwar Zutaten zuhause haben, jedoch keine passende Rezeptidee finden. Zudem wurde untersucht, welche Funktionen bestehende Rezeptplattformen anbieten und welche Bedürfnisse Nutzer bei der Rezeptsuche haben.
 
 - **Wesentliche Erkenntnisse:**
@@ -102,7 +106,8 @@ Diese Variante bietet den grössten Mehrwert für die Zielgruppe und unterstütz
 <img width="4980" height="3637" alt="user journey" src="https://github.com/user-attachments/assets/28b47a07-ceca-49b5-ad7c-e5dcae6052ef" />
 
 
-- **Mockup:** _[URL, z. B. Figma; Screenshots mit kurzen Beschreibungen]_  
+- **Mockup:** _[URL, z. B. Figma; Screenshots mit kurzen Beschreibungen]_
+    https://www.figma.com/design/tqw3EUuCFW5JyzpeIys8QV/SmartRecipe?node-id=0-1&p=f&t=WYy86HqDyapit9uA-0
 
 ### 3.4 Prototype
 
@@ -268,30 +273,50 @@ Fasst die technische Realisierung zusammen.
 
 ## 4. Erweiterungen [Optional]
 Dokumentiert Erweiterungen über den Mindestumfang hinaus.
-> **Hinweis:** Jede Erweiterung ist separat nach dem folgenden Schema zu beschreiben.
 
-### _[4.x Kurzbeschreibung / Titel]_  
-- **Beschreibung & Nutzen:** _[Was wurde erweitert? Warum?]_  
-- **Wo umgesetzt:** _[Wie und wo wurde es gemacht? Frontend, Backend, Datenbank?]_  
-- **Referenz:** _[Wo wird die Erweiterung auch noch beschrieben, z.B. Screenshot oder Beschreibung in einem anderen Kapitel]_  
-- **Aus Evaluation abgeleitet?:** _[Wurde diese Erweiterung als Folge eines in der Evaluation identifizierten Issues implementiert?]_  
+### 4.1 Benutzerkonten mit Login und Registrierung
+- **Beschreibung & Nutzen:** _[Was wurde erweitert? Warum?]_
+     Die Anwendung wurde um eine Benutzerverwaltung erweitert. Nutzer können sich registrieren und anmelden, wodurch persönliche Funktionen wie Favoriten und eigene Rezepte ermöglicht werden.
+- **Wo umgesetzt:** _[Wie und wo wurde es gemacht? Frontend, Backend, Datenbank?]_
+     - Frontend: Login- und Registrierungsseiten 
+     - Backend: Authentifizierungs-API
+     - Datenbank: Speicherung von Benutzerkonten
+- **Referenz:** _[Wo wird die Erweiterung auch noch beschrieben, z.B. Screenshot oder Beschreibung in einem anderen Kapitel]_
+     - Kapitel 3.4.1 – Login / Registrierung
+- **Aus Evaluation abgeleitet?:** _[Wurde diese Erweiterung als Folge eines in der Evaluation identifizierten Issues implementiert?]_
+     - Nein, bereits zu Beginn als Erweiterung geplant.
 
-> Das folgende **Beispiel** wurde bewusst kurz gehalten. Erweiterungen dürfen auch ausführlicher beschrieben werden.
-
-### 4.1 Tabelle nach Kategorien filtern
-- **Beschreibung & Nutzen:** Tabelle X kann nach Kategorie gefiltert werden, weil User typischerweise nur an einer bestimmten Kategorie interessiert sind.  
-- **Wo umgesetzt:** 
-  - **Frontend:** Tabelle mit Dropdown in Datei ...
-  - **Backend:** Form Action ... in Datei ...
-  - **Datenbank:** MongoDB-Query in Datei ...
-- **Referenz:** Screenshot in Kap. x.y
-- **Aus Evaluation abgeleitet?:** Ja, Issue x.y
 
 ## 5. Projektorganisation [Optional]
 Beispiele:
-- **Repository & Struktur:** _[Link; kurze Strukturübersicht]_  
-- **Issue-Management:** _[Vorgehen kurz beschreiben]_  
+- **Repository & Struktur:** _[Link; kurze Strukturübersicht]_
+     Der Quellcode wird in einem GitHub-Repository verwaltet.
+
+     Repository: https://github.com/dilaraa11/smartrecipe
+
+     Die Projektstruktur basiert auf SvelteKit und ist in Frontend-Seiten, API-Endpunkte, Datenbankzugriffe und wiederverwendbare Komponenten gegliedert.
+
+     Wichtige Verzeichnisse:
+
+  - src/routes: Seiten und API-Endpunkte
+  - src/lib: Wiederverwendbare Komponenten und Typdefinitionen
+  - static: Bilder und statische Dateien
+
+- **Issue-Management:** _[Vorgehen kurz beschreiben]_
+    Die Entwicklung erfolgte iterativ. Neue Funktionen, Fehlerbehebungen und Verbesserungen wurden schrittweise umgesetzt und getestet. Erkenntnisse aus der Evaluation wurden direkt in die Weiterentwicklung des Prototyps integriert.
+
 - **Commit-Praxis:** _[z. B. sprechende Commits]_
+    Für die Versionsverwaltung wurde Git verwendet. Änderungen wurden regelmässig in Form von thematisch zusammengehörenden Commits gespeichert.
+
+Beispiele:
+
+- Added authentication and user accounts
+- Added recipe images
+- Improved profile page
+- Added my recipes page
+- Updated recipe creation form
+
+Durch die regelmässigen Commits konnte die Entwicklung nachvollziehbar dokumentiert und jederzeit auf frühere Versionen zurückgegriffen werden.
 
 ## 6. KI-Deklaration
 Die folgende Deklaration ist verpflichtend und beschreibt den Einsatz von KI im Projekt.
