@@ -8,6 +8,7 @@
     { href: "/", label: "Home" },
     { href: "/recipes", label: "Rezepte" },
     { href: "/create", label: "Erstellen" },
+    { href: "/my-recipes", label: "Meine Rezepte" },
     { href: "/favorites", label: "Favoriten" },
   ];
 

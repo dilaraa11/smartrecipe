@@ -14,9 +14,9 @@
     "Schnell",
     "Vegetarisch",
     "Vegan",
-    "International",
+    "Süss",
     "Frühstück",
-    "Meal Prep",
+    "Italienisch",
   ];
 
   const activeFiltersCount = $derived(
@@ -173,7 +173,7 @@
 
         <div class="filter-panel">
           <div class="filter-grid">
-            <label for="max-time">
+            <label class="dropdown-label" for="max-time">
               Max. Zeit
               <select id="max-time" bind:value={maxTime}>
                 <option value="">Alle</option>
@@ -184,7 +184,7 @@
               </select>
             </label>
 
-            <label for="difficulty">
+            <label class="dropdown-label" for="difficulty">
               Schwierigkeit
               <select id="difficulty" bind:value={difficultyFilter}>
                 <option value="">Alle</option>
@@ -196,19 +196,7 @@
           </div>
 
           <div class="tag-filter-group">
-            <label for="tag-search">Weitere Tags</label>
-            <div class="tag-search-row">
-              <input
-                id="tag-search"
-                bind:value={tagSearch}
-                placeholder="z.B. Asiatisch, Low Carb, Familienküche"
-                onkeydown={(e) => e.key === "Enter" && addTag()}
-              />
-              <button class="tag-add-button" type="button" onclick={addTag}>
-                +
-              </button>
-            </div>
-
+            <span class="filter-label">Tags</span>
             <div class="filter-tags" aria-label="Tag-Vorschläge">
               {#each tagOptions as tag}
                 <label class="filter-chip">
@@ -222,6 +210,21 @@
                   <span>{tag}</span>
                 </label>
               {/each}
+            </div>
+
+            <label class="additional-tag-label" for="tag-search"
+              >Weitere Tags</label
+            >
+            <div class="tag-search-row">
+              <input
+                id="tag-search"
+                bind:value={tagSearch}
+                placeholder="z.B. Suppe, Pasta, Türkisch"
+                onkeydown={(e) => e.key === "Enter" && addTag()}
+              />
+              <button class="add-button tag-add-button" type="button" onclick={addTag}>
+                Hinzufügen
+              </button>
             </div>
           </div>
         </div>
@@ -342,6 +345,15 @@
     font-weight: 700;
   }
 
+  .search-card .filter-label,
+  .search-card .additional-tag-label {
+    display: block;
+    margin-bottom: 0.6rem;
+    color: #312f2c;
+    font-size: 0.95rem;
+    font-weight: 700;
+  }
+
   .search-card input,
   .search-card select {
     min-height: 3.1rem;
@@ -354,10 +366,32 @@
     padding: 0.85rem 0;
   }
 
+  .search-card select {
+    padding-right: 1.8rem;
+    background-image: none;
+  }
+
   .search-card input:focus,
   .search-card select:focus {
     border-color: #1f1d1a;
     box-shadow: none;
+  }
+
+  .dropdown-label {
+    position: relative;
+  }
+
+  .dropdown-label::after {
+    content: "";
+    position: absolute;
+    right: 0.1rem;
+    bottom: 1.25rem;
+    width: 0.45rem;
+    height: 0.45rem;
+    border-right: 1.5px solid #1f1d1a;
+    border-bottom: 1.5px solid #1f1d1a;
+    pointer-events: none;
+    transform: rotate(45deg);
   }
 
   .filter-panel {
@@ -373,12 +407,17 @@
   }
 
   .tag-filter-group {
-    margin-top: 0.95rem;
+    margin-top: 1.25rem;
+  }
+
+  .additional-tag-label {
+    margin-top: 1.35rem;
   }
 
   .tag-search-row {
     display: flex;
-    gap: 0.65rem;
+    gap: 0.75rem;
+    align-items: stretch;
   }
 
   .tag-search-row input {
@@ -386,28 +425,18 @@
     min-width: 0;
   }
 
-  .tag-add-button {
-    width: 3.1rem;
-    border-radius: 0;
-    background: #1f1d1a;
-    color: white;
-    font-size: 1.35rem;
-  }
-
-  .tag-add-button:hover {
-    background: #8a624b;
-  }
-
   .filter-tags {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.55rem;
-    margin-top: 0.75rem;
+    display: grid;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    column-gap: 0.8rem;
+    row-gap: 0.95rem;
+    margin-top: 0.9rem;
   }
 
   .filter-chip {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.45rem;
     margin: 0;
     padding: 0.45rem 0;
@@ -418,6 +447,15 @@
     font-size: 0.9rem;
     font-weight: 650;
     cursor: pointer;
+  }
+
+  .search-card .filter-chip {
+    display: inline-flex;
+    width: 100%;
+    margin-bottom: 0;
+    font-size: 0.9rem;
+    font-weight: 650;
+    gap: 0.6rem;
   }
 
   .filter-chip input {
@@ -560,6 +598,10 @@
   @media (max-width: 520px) {
     .filter-grid {
       grid-template-columns: 1fr;
+    }
+
+    .filter-tags {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 
     .tag-search-row {
