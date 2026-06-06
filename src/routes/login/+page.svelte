@@ -112,7 +112,7 @@
     {#if mode === "login"}
       <label>
         E-Mail oder Benutzername
-        <input bind:value={identifier} placeholder="name@example.com oder benutzername" />
+        <input bind:value={identifier} placeholder="name@example.com oder Benutzername" />
       </label>
     {:else}
       <label>

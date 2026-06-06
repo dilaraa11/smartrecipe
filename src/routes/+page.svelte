@@ -163,7 +163,7 @@
             id="ingredient"
             type="text"
             bind:value={ingredient}
-            placeholder="z.B. Tomate, Eier, Reis"
+            placeholder="z.B. Tomaten, Eier, Reis"
             onkeydown={(e) => e.key === "Enter" && addIngredient()}
           />
 
