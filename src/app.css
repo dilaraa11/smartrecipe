@@ -873,21 +873,17 @@ textarea:focus {
 }
 
 .dropdown-label select {
-  padding-right: 2rem;
-  background-image: none;
-}
-
-.dropdown-label::after {
-  content: "";
-  position: absolute;
-  right: 1rem;
-  bottom: 1.35rem;
-  width: 0.45rem;
-  height: 0.45rem;
-  border-right: 1.5px solid #1f1d1a;
-  border-bottom: 1.5px solid #1f1d1a;
-  pointer-events: none;
-  transform: rotate(45deg);
+  padding-right: 2.8rem;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #1f1d1a 50%),
+    linear-gradient(135deg, #1f1d1a 50%, transparent 50%);
+  background-position:
+    calc(100% - 1.25rem) 50%,
+    calc(100% - 0.9rem) 50%;
+  background-size:
+    0.35rem 0.35rem,
+    0.35rem 0.35rem;
+  background-repeat: no-repeat;
 }
 
 .image-upload-section {
