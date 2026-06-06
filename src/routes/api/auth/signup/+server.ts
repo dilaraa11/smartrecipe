@@ -5,13 +5,19 @@ import { setSessionCookie } from '$lib/server/session';
 import type { Cookies } from '@sveltejs/kit';
 
 type SignupRequest = {
-  name?: string;
+  firstName?: string;
+  lastName?: string;
+  username?: string;
   email?: string;
   password?: string;
 };
 
 function normalizeEmail(email: string) {
   return email.trim().toLowerCase();
+}
+
+function normalizeUsername(username: string) {
+  return username.trim().toLowerCase();
 }
 
 export async function POST({
@@ -23,11 +29,14 @@ export async function POST({
 }) {
   try {
     const body = (await request.json()) as SignupRequest;
-    const name = body.name?.trim() ?? '';
+    const firstName = body.firstName?.trim() ?? '';
+    const lastName = body.lastName?.trim() ?? '';
+    const username = normalizeUsername(body.username ?? '');
     const email = normalizeEmail(body.email ?? '');
     const password = body.password ?? '';
+    const name = [firstName, lastName].filter(Boolean).join(' ');
 
-    if (!name || !email || !password) {
+    if (!firstName || !lastName || !username || !email || !password) {
       return json({ error: 'Bitte alle Felder ausfüllen.' }, { status: 400 });
     }
 
@@ -42,12 +51,20 @@ export async function POST({
     const users = db.collection('users');
 
     await users.createIndex({ email: 1 }, { unique: true });
+    await users.createIndex({ username: 1 }, { unique: true });
 
-    const existingUser = await users.findOne({ email });
+    const existingUser = await users.findOne({
+      $or: [{ email }, { username }],
+    });
 
     if (existingUser) {
       return json(
-        { error: 'Mit dieser E-Mail gibt es bereits ein Konto.' },
+        {
+          error:
+            existingUser.email === email
+              ? 'Mit dieser E-Mail gibt es bereits ein Konto.'
+              : 'Dieser Benutzername ist bereits vergeben.',
+        },
         { status: 409 },
       );
     }
@@ -56,6 +73,9 @@ export async function POST({
 
     const result = await users.insertOne({
       name,
+      firstName,
+      lastName,
+      username,
       email,
       passwordHash: hashPassword(password),
       createdAt,
@@ -69,6 +89,9 @@ export async function POST({
       user: {
         id: result.insertedId,
         name,
+        firstName,
+        lastName,
+        username,
         email,
         createdAt,
         lastLoginAt: createdAt,

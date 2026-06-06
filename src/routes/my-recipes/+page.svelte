@@ -5,6 +5,7 @@
   let loading = $state(true);
   let error = $state("");
   let mustLogin = $state(false);
+  let deletingRecipeId = $state<string | null>(null);
 
   async function loadMyRecipes() {
     try {
@@ -36,6 +37,39 @@
   $effect(() => {
     loadMyRecipes();
   });
+
+  async function deleteRecipe(recipe: Recipe) {
+    if (!recipe._id) return;
+
+    const confirmed = confirm(
+      `Möchtest du "${recipe.title}" wirklich löschen?`,
+    );
+
+    if (!confirmed) return;
+
+    try {
+      deletingRecipeId = recipe._id;
+      error = "";
+
+      const response = await fetch(`/api/recipes/${recipe._id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error ?? "Rezept konnte nicht gelöscht werden.");
+      }
+
+      recipes = recipes.filter((item) => item._id !== recipe._id);
+    } catch (err) {
+      error =
+        err instanceof Error
+          ? err.message
+          : "Beim Löschen des Rezepts ist ein Fehler passiert.";
+    } finally {
+      deletingRecipeId = null;
+    }
+  }
 </script>
 
 <main class="page">
@@ -88,11 +122,74 @@
             Zutaten: {recipe.ingredients.join(", ")}
           </p>
 
-          <a class="recipe-button" href={`/recipes/${recipe._id}`}>
-            Rezept ansehen
-          </a>
+          <div class="recipe-actions">
+            <a class="recipe-button" href={`/recipes/${recipe._id}`}>
+              Rezept ansehen
+            </a>
+            <a class="edit-recipe-button" href={`/my-recipes/${recipe._id}/edit`}>
+              Bearbeiten
+            </a>
+          </div>
+
+          <button
+            class="delete-recipe-button"
+            type="button"
+            disabled={deletingRecipeId === recipe._id}
+            onclick={() => deleteRecipe(recipe)}
+          >
+            {deletingRecipeId === recipe._id ? "Wird gelöscht..." : "Löschen"}
+          </button>
         </article>
       {/each}
     </section>
   {/if}
 </main>
+
+<style>
+  .delete-recipe-button {
+    width: 100%;
+    margin-top: 0.65rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #cfc7bb;
+    background: transparent;
+    color: #991b1b;
+    font-weight: 900;
+  }
+
+  .delete-recipe-button:hover {
+    border-color: #991b1b;
+    background: #fff7f7;
+  }
+
+  .delete-recipe-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+
+  .recipe-actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.65rem;
+  }
+
+  .edit-recipe-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.85rem 1rem;
+    border: 1px solid #1f1d1a;
+    color: #1f1d1a;
+    font-weight: 900;
+    text-align: center;
+  }
+
+  .edit-recipe-button:hover {
+    background: #f4eee6;
+  }
+
+  @media (max-width: 560px) {
+    .recipe-actions {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

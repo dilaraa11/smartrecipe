@@ -146,6 +146,14 @@
         <h2>Zubereitung</h2>
         <p>{recipe.instructions}</p>
       </section>
+
+      {#if recipe.createdByUsername}
+        <p class="created-by">
+          Erstellt von {recipe.createdByCurrentUser
+            ? "dir"
+            : recipe.createdByUsername}
+        </p>
+      {/if}
     </section>
   {/if}
 </main>
@@ -259,5 +267,13 @@
   .ingredient-list strong {
     color: #1f1d1a;
     white-space: nowrap;
+  }
+
+  .created-by {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #ece5da;
+    color: #68625a;
+    font-weight: 650;
   }
 </style>

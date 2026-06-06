@@ -2,7 +2,10 @@
   import { goto } from "$app/navigation";
 
   let mode = $state<"login" | "signup">("login");
-  let name = $state("");
+  let firstName = $state("");
+  let lastName = $state("");
+  let username = $state("");
+  let identifier = $state("");
   let email = $state("");
   let password = $state("");
   let message = $state("");
@@ -23,7 +26,10 @@
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            name,
+            firstName,
+            lastName,
+            username,
+            identifier,
             email,
             password,
           }),
@@ -41,7 +47,10 @@
           ? `Willkommen zurück, ${result.user.name}!`
           : `Dein Konto wurde erstellt, ${result.user.name}!`;
 
-      name = "";
+      firstName = "";
+      lastName = "";
+      username = "";
+      identifier = "";
       email = "";
       password = "";
       goto("/");
@@ -79,21 +88,38 @@
         type="button"
         onclick={() => (mode = "signup")}
       >
-        Signup
+        Register
       </button>
     </div>
 
     {#if mode === "signup"}
       <label>
-        Name
-        <input bind:value={name} placeholder="Dein Name" />
+        Vorname
+        <input bind:value={firstName} placeholder="Dein Vorname" />
+      </label>
+
+      <label>
+        Nachname
+        <input bind:value={lastName} placeholder="Dein Nachname" />
+      </label>
+
+      <label>
+        Benutzername
+        <input bind:value={username} placeholder="Dein Benutzername" />
       </label>
     {/if}
 
-    <label>
-      E-Mail
-      <input bind:value={email} type="email" placeholder="name@example.com" />
-    </label>
+    {#if mode === "login"}
+      <label>
+        E-Mail oder Benutzername
+        <input bind:value={identifier} placeholder="name@example.com oder benutzername" />
+      </label>
+    {:else}
+      <label>
+        E-Mail
+        <input bind:value={email} type="email" placeholder="name@example.com" />
+      </label>
+    {/if}
 
     <label>
       Passwort

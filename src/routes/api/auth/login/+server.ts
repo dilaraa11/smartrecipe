@@ -6,12 +6,9 @@ import type { Cookies } from '@sveltejs/kit';
 
 type LoginRequest = {
   email?: string;
+  identifier?: string;
   password?: string;
 };
-
-function normalizeEmail(email: string) {
-  return email.trim().toLowerCase();
-}
 
 export async function POST({
   request,
@@ -22,22 +19,24 @@ export async function POST({
 }) {
   try {
     const body = (await request.json()) as LoginRequest;
-    const email = normalizeEmail(body.email ?? '');
+    const identifier = (body.identifier ?? body.email ?? '').trim().toLowerCase();
     const password = body.password ?? '';
 
-    if (!email || !password) {
+    if (!identifier || !password) {
       return json(
-        { error: 'Bitte E-Mail und Passwort eingeben.' },
+        { error: 'Bitte E-Mail oder Benutzername und Passwort eingeben.' },
         { status: 400 },
       );
     }
 
     const db = await getDb();
-    const user = await db.collection('users').findOne({ email });
+    const user = await db.collection('users').findOne({
+      $or: [{ email: identifier }, { username: identifier }],
+    });
 
     if (!user || !verifyPassword(password, user.passwordHash)) {
       return json(
-        { error: 'E-Mail oder Passwort ist falsch.' },
+        { error: 'E-Mail, Benutzername oder Passwort ist falsch.' },
         { status: 401 },
       );
     }
@@ -57,6 +56,7 @@ export async function POST({
         id: user._id,
         name: user.name,
         email: user.email,
+        username: user.username ?? user.name,
         lastLoginAt,
       },
     });

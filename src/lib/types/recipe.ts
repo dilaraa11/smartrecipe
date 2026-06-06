@@ -6,6 +6,10 @@ export type Recipe = {
   difficulty: 'Einfach' | 'Mittel' | 'Schwer';
   tags: string[];
   ingredients: string[];
+  ingredientDetails?: {
+    name: string;
+    amount: string;
+  }[];
   ingredientAmounts?: {
     name: string;
     amount2: string;
@@ -14,6 +18,9 @@ export type Recipe = {
   emoji: string;
   imageUrl?: string;
   category: string;
+  baseServings?: 2 | 4;
   instructions: string;
   favorite?: boolean;
+  createdByUsername?: string;
+  createdByCurrentUser?: boolean;
 };
