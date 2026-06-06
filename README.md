@@ -365,5 +365,27 @@ _[Nutzen, Grenzen, Risiken/Qualitätssicherung, ...]_
 ## 7. Anhang [Optional]
 Beispiele:
 - **Quellen:** _[verwendete Vorlagen/Assets/Modelle; Lizenz/Urheberrecht; ...]_
+     Verwendete Technologien: 
+   - SvelteKit: https://kit.svelte.dev/
+   - MongoDB Atlas: https://www.mongodb.com/atlas
+   - Netlify: https://www.netlify.com/
+   - GitHub: https://github.com/
+
+     Verwendete Schriftarten:
+
+   - Elms Sans: Hauptschrift für Navigation, Texte, Formulare und Buttons
+   - Inter: Fallback-Schrift, falls Elms Sans nicht geladen/verfügbar ist
+   - Amatic SC: Titelschrift für grosse Überschriften wie „Rezept erstellen“, „Einloggen“, „Hallo …!“
+
+     Design-Inspiration:
+
+   - Fooby (https://fooby.ch)
+
+   Die Plattform diente als Inspiration für die visuelle Gestaltung, insbesondere hinsichtlich Typografie, Struktur und Benutzerführung.
+
+     Bilder: 
+
+   - Die in der Anwendung verwendeten Rezeptbilder wurden mithilfe von KI (ChatGPT) generiert und anschliessend manuell ausgewählt und in die Anwendung integriert.
+
 - **Testskript & Materialien:** _[Link/Datei]_  
 - **Rohdaten/Auswertung:** _[Link/Datei]_  
