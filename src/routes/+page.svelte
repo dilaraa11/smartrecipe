@@ -9,6 +9,7 @@
   let difficultyFilter = $state("");
   let selectedTags = $state<string[]>([]);
   let tagSearch = $state("");
+  let currentUser = $state<{ name: string } | null>(null);
 
   const tagOptions = [
     "Schnell",
@@ -46,8 +47,20 @@
     recipes = await response.json();
   }
 
+  async function loadCurrentUser() {
+    const response = await fetch("/api/auth/me");
+    const result = await response.json();
+
+    currentUser = result.user ?? null;
+  }
+
+  function getFirstName(name: string) {
+    return name.trim().split(/\s+/)[0] || name;
+  }
+
   $effect(() => {
     loadRecipes();
+    loadCurrentUser();
   });
 
   function addIngredient() {
@@ -129,6 +142,10 @@
 </script>
 
 <main class="page home-page">
+  {#if currentUser}
+    <p class="home-greeting">Hallo {getFirstName(currentUser.name)}!</p>
+  {/if}
+
   <section class="hero">
     <div class="hero-content">
       <p class="eyebrow">Rezeptsuche</p>
@@ -276,6 +293,18 @@
       BlinkMacSystemFont,
       "Segoe UI",
       sans-serif;
+  }
+
+  .home-greeting {
+    max-width: 1180px;
+    margin: 0 auto 0.5rem;
+    color: #1f1d1a;
+    font-family:
+      "Amatic SC",
+      cursive;
+    font-size: clamp(2.2rem, 4vw, 3.8rem);
+    font-weight: 700;
+    line-height: 0.9;
   }
 
   .hero {

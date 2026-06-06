@@ -32,6 +32,10 @@
     goto("/login");
   }
 
+  function getFirstName(name: string) {
+    return name.trim().split(/\s+/)[0] || name;
+  }
+
   $effect(() => {
     $page.url.pathname;
     profileOpen = false;
@@ -72,7 +76,7 @@
           onclick={() => (profileOpen = !profileOpen)}
         >
           <span>{currentUser.name.slice(0, 1).toUpperCase()}</span>
-          <strong>{currentUser.name}</strong>
+          <strong>{getFirstName(currentUser.name)}</strong>
         </button>
 
         {#if profileOpen}

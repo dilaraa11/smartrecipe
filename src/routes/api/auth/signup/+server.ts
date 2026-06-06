@@ -52,11 +52,14 @@ export async function POST({
       );
     }
 
+    const createdAt = new Date().toISOString();
+
     const result = await users.insertOne({
       name,
       email,
       passwordHash: hashPassword(password),
-      createdAt: new Date().toISOString(),
+      createdAt,
+      lastLoginAt: createdAt,
     });
 
     setSessionCookie(cookies, result.insertedId.toString());
@@ -67,6 +70,8 @@ export async function POST({
         id: result.insertedId,
         name,
         email,
+        createdAt,
+        lastLoginAt: createdAt,
       },
     });
   } catch (error) {

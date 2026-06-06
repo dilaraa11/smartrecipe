@@ -42,6 +42,13 @@ export async function POST({
       );
     }
 
+    const lastLoginAt = new Date().toISOString();
+
+    await db.collection('users').updateOne(
+      { _id: user._id },
+      { $set: { lastLoginAt } },
+    );
+
     setSessionCookie(cookies, user._id.toString());
 
     return json({
@@ -50,6 +57,7 @@ export async function POST({
         id: user._id,
         name: user.name,
         email: user.email,
+        lastLoginAt,
       },
     });
   } catch (error) {
