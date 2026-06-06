@@ -24,40 +24,84 @@
 ## 1. Ausgangslage
 Viele Personen stehen täglich vor der Frage, was sie mit den vorhandenen Zutaten zuhause kochen können. Oft fehlen Ideen für passende Gerichte, obwohl bereits genügend Lebensmittel vorhanden wären. Zusätzlich verbringen Nutzer viel Zeit mit der Suche nach einfachen Rezepten oder vergessen interessante Gerichte, die sie bereits gefunden haben.
 - **Problem:** 
-   Nutzer besitzen Zutaten zuhause, wissen jedoch nicht, welche Gerichte sie daraus zubereiten können. Zudem fehlt häufig eine einfache Möglichkeit, Rezepte zentral zu speichern und wiederzufinden.
+   Viele Personen besitzen zuhause verschiedene Zutaten, wissen jedoch oft nicht, welche Gerichte sie daraus zubereiten können. Die Suche nach passenden Rezepten ist häufig zeitaufwendig und interessante Rezepte gehen schnell verloren, da keine zentrale Verwaltung vorhanden ist.
 - **Ziele:** 
-  Entwicklung einer modernen Webapplikation zur Rezeptsuche basierend auf vorhandenen Zutaten. Nutzer sollen passende Rezepte finden, eigene Rezepte erstellen sowie Favoriten speichern können.
+  Entwicklung einer benutzerfreundlichen Webapplikation zur Rezeptsuche anhand vorhandener Zutaten. Nutzer sollen passende Rezepte finden, eigene Rezepte erstellen und interessante Rezepte als Favoriten speichern können.
 - **Primäre Zielgruppe:** 
-  Personen, die einfach und schnell Rezeptideen mit vorhandenen Zutaten suchen möchten.
+  Personen, die schnell und unkompliziert Rezeptideen auf Basis vorhandener Zutaten suchen.
 - **Weitere Stakeholder [Optional]:** 
-  Hobbyköche, Studenten, Familien oder Personen mit wenig Zeit zum Kochen.
-
+  Hobbyköche, Studierende, Familien sowie Personen mit wenig Zeit für die Essensplanung.
 
 ## 2. Lösungsidee
 Die Anwendung „SmartRecipe“ ist eine Fullstack-Webapplikation, welche Nutzern ermöglicht, Zutaten einzugeben und passende Rezepte anzuzeigen. Die Daten werden dynamisch aus einer MongoDB-Datenbank geladen. Zusätzlich können eigene Rezepte erstellt und Favoriten gespeichert werden.
 - **Kernfunktionalität:** 
-  - Rezeptsuche anhand von Zutaten  
-  - Anzeige von Rezeptdetails  
-  - Eigene Rezepte erstellen und speichern  
-  - Favoritenfunktion  
-- **Annahmen [Optional]:** 
- Nutzer bevorzugen eine einfache und übersichtliche Benutzeroberfläche sowie schnelle Rezeptvorschläge ohne komplizierte Filter.
-- **Abgrenzung [Optional]:** _[Was gehört explizit nicht zum Umfang?]_
+  - Rezeptsuche anhand vorhandener Zutaten
+  - Filterung nach Zubereitungszeit, Schwierigkeit und Kategorien
+  - Anzeige von Rezeptdetails
+  - Registrierung und Login
+  - Favoritenfunktion für persönliche Rezeptsammlungen
+  - Eigene Rezepte erstellen und verwalten
+  - Persönlicher Profilbereich
+- **Annahmen:** 
+ Nutzer bevorzugen eine einfache und übersichtliche Benutzeroberfläche. Zudem möchten sie Rezeptvorschläge möglichst schnell finden und durch Filterfunktionen gezielt nach passenden Rezepten suchen können.
+- **Abgrenzung:**
+Nicht Bestandteil des Projekts sind soziale Funktionen wie Kommentare, Bewertungen oder das Teilen von Rezepten mit anderen Nutzern. Ebenso werden keine externen Rezeptplattformen oder KI-generierten Rezeptvorschläge integriert.
 
 ## 3. Vorgehen & Artefakte
 Die Durchführung erfolgt phasenbasiert; dokumentieren Sie die wichtigsten Ergebnisse je Phase.
 
 ### 3.1 Understand & Define
 - **Zielgruppenverständnis:** _[Problemraumanalyse, Recherche, (Proto-)Personas]_
-- **Wesentliche Erkenntnisse:** _[Stichpunkte]_
+Zu Beginn wurde das Problem analysiert, dass viele Personen zwar Zutaten zuhause haben, jedoch keine passende Rezeptidee finden. Zudem wurde untersucht, welche Funktionen bestehende Rezeptplattformen anbieten und welche Bedürfnisse Nutzer bei der Rezeptsuche haben.
+
+- **Wesentliche Erkenntnisse:**
+  - Nutzer möchten Rezepte möglichst schnell finden.
+  - Die Suche anhand vorhandener Zutaten bietet einen klaren Mehrwert.
+  - Filter nach Zeit, Schwierigkeit und Kategorien unterstützen die Suche.
+  - Nutzer möchten interessante Rezepte speichern und später wiederfinden.
+  - Eine einfache und übersichtliche Benutzeroberfläche ist wichtiger als viele Funktionen.
 
 ### 3.2 Sketch
-- **Variantenüberblick:** _[kurz]_
+- **Variantenüberblick:** Im Rahmen der Konzeptphase wurden mithilfe der Kreativmethode Crazy 8s verschiedene Lösungsansätze für die Gestaltung der Startseite und der Rezeptsuche erarbeitet. Die Varianten unterscheiden sich hinsichtlich Suchkonzept, Navigation, Informationsdarstellung und Personalisierung. Ziel war es, die für die Zielgruppe verständlichste und effizienteste Lösung auszuwählen.
 - **Skizzen:** _[Mehrere Varianten; Unterschiede kurz dokumentieren.]_
+<img width="5712" height="4284" alt="Crazy 8s" src="https://github.com/user-attachments/assets/5a132e86-662e-4599-8c48-f769105baa9d" />
+
+Es wurden insgesamt acht Varianten erstellt und verglichen.
+
+- Variante 1 stellt die Suche anhand vorhandener Zutaten in den Mittelpunkt. 
+- Variante 2 fokussiert auf eine klassische Rezeptsuche über ein Suchfeld.
+- Variante 3 kombiniert Zutaten-Suche mit zusätzlichen Filtern.
+- Variante 4 setzt auf eine bildorientierte Kartenansicht der Rezepte.
+- Variante 5 zeigt eine Übersicht der gespeicherten Favoriten. Der Fokus liegt auf dem schnellen Wiederfinden bereits gespeicherter Rezepte und einer persönlichen Rezeptsammlung.
+- Variante 6 integriert persönliche Bereiche wie Favoriten und eigene Rezepte direkt auf der Startseite. 
+- Variante 7 organisiert Rezepte primär über Kategorien und Tags.
+- Variante 8 führt den Nutzer schrittweise durch den Suchprozess.
+
+
 
 ### 3.3 Decide
-- **Gewählte Variante & Begründung:** _[Entscheidkriterien nennen]_  
-- **End-to-End-Ablauf:** _[Beschreibung inkl. User Journey Map]_  
+- **Gewählte Variante & Begründung:** _[Entscheidkriterien nennen]_
+Gewählt wurde eine Kombination aus Variante 3, Variante 4 und Variante 6. Die Lösung kombiniert die Suche anhand vorhandener Zutaten mit zusätzlichen Filtermöglichkeiten sowie einer übersichtlichen und bildorientierten Darstellung der Rezepte.
+
+  Die Entscheidung erfolgte aufgrund folgender Kriterien:
+  - Einfache und intuitive Bedienung
+  - Schnelles Finden passender Rezepte
+  - Übersichtliche Darstellung der Suchergebnisse
+  - Unterstützung durch Filterfunktionen
+  - Gute Erweiterbarkeit für Favoriten, Benutzerkonten und eigene Rezepte
+
+Diese Variante bietet den grössten Mehrwert für die Zielgruppe und unterstützt den gesamten Suchprozess effizient.
+- **End-to-End-Ablauf:** _[Beschreibung inkl. User Journey Map]_
+1. Der Nutzer öffnet die Startseite.
+2. Vorhandene Zutaten werden eingegeben.
+3. Optional werden Filter wie Zeit, Schwierigkeit oder Kategorien ausgewählt.
+4. Die Anwendung zeigt passende Rezepte an.
+5. Der Nutzer öffnet ein Rezept und betrachtet die Details.
+6. Das Rezept kann als Favorit gespeichert werden.
+7. Das Rezept kann nun unter Favoriten wieder angezeigt werden.
+<img width="4980" height="3637" alt="user journey" src="https://github.com/user-attachments/assets/28b47a07-ceca-49b5-ad7c-e5dcae6052ef" />
+
+
 - **Mockup:** _[URL, z. B. Figma; Screenshots mit kurzen Beschreibungen]_  
 
 ### 3.4 Prototype
